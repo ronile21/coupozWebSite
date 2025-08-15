@@ -1,31 +1,559 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoupoZ - Startup and Real-Time Marketing</title>
-    <link rel="stylesheet" href="style.css">
+    <title>CoupoZ: Interactive Investor Report</title>
+    <!-- Chosen Palette: Modern Tech Palette -->
+    <!-- Application Structure Plan: A single-page, dashboard-style application with thematic sections (Opportunity, How It Works, Financials, etc.). This non-linear structure allows investors to quickly navigate to key data points. Interactions like the filterable financial chart and clickable roadmap timeline are designed to make complex information digestible and engaging. -->
+    <!-- Visualization & Content Choices: Financials -> Goal: Compare -> Interactive Bar Chart (Chart.js) -> User can filter by revenue stream to explore data -> Justification: Makes dense financial projections easy to understand. Roadmap -> Goal: Change -> Interactive Timeline (HTML/CSS/JS) -> User clicks a phase to see details -> Justification: Clearly shows progression over time. Competitors -> Goal: Compare -> HTML Table -> Hover effects for clarity -> Justification: Direct and clear comparison. AI-Powered Features -> Goal: Demonstrate innovation -> Text Generation (Gemini API) -> User inputs product details to get campaign ideas -> Justification: Shows practical AI application for business users, enhancing product value. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover {
+            color: #3B82F6;
+        }
+        .active-nav {
+            color: #3B82F6;
+            border-bottom: 2px solid #3B82F6;
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .roadmap-item.active .roadmap-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .roadmap-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3B82F6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>CoupoZ</h1>
-        <nav>
-            <a href="#">How It Works</a>
-            <a href="#">Pricing</a>
-            <a href="#">FAQ</a>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="uploaded:coupon_admin_logo.jpg-270dcca3-e93d-42cd-bb22-83e91c20fa52" alt="CoupoZ Admin Logo" class="h-10 w-10 rounded-full">
+                <h1 class="text-2xl font-bold text-slate-800">COUPOZ</h1>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#opportunity" class="nav-link text-slate-600 font-medium pb-1">The Opportunity</a>
+                <a href="#how-it-works" class="nav-link text-slate-600 font-medium pb-1">How It Works</a>
+                <a href="#financials" class="nav-link text-slate-600 font-medium pb-1">Financials</a>
+                <a href="#the-plan" class="nav-link text-slate-600 font-medium pb-1">The Plan</a>
+                <a href="#team" class="nav-link text-slate-600 font-medium pb-1">Team</a>
+                <a href="#ai-features" class="nav-link text-slate-600 font-medium pb-1">AI Features</a>
+            </div>
         </nav>
     </header>
+
     <main>
-        <section class="hero">
-            <div class="hero-text">
-                <h2>Startup And Real-Time Marketing</h2>
-                <p>CoupoZ powers startup success with real-time marketing solutions.</p>
-                <a href="#" class="cta-button">Get Started</a>
-            </div>
-            <div class="hero-image">
-                <img src="images/hero.png" alt="CoupoZ Hero">
+        <section id="hero" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <img src="uploaded:coupoz_512.png-ad3e59cd-2a5b-446d-af7b-f9250b7b31e4" alt="CoupoZ Main Logo" class="h-24 w-24 md:h-32 md:w-32 mx-auto mb-6">
+                <h2 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">Real-Time Growth for Physical Businesses</h2>
+                <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Empowering retail with instant campaigns and hyper-targeted offers to turn foot traffic into predictable revenue.</p>
+                <div class="mt-10">
+                    <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 inline-block transform hover:scale-105">Request Funding Deck</a>
+                </div>
             </div>
         </section>
+
+        <section id="opportunity" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">The Core Challenge</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">In the digital age, physical businesses face significant hurdles that impact their bottom line.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="stat-card">
+                        <div class="text-4xl text-blue-500 mb-4">🕒</div>
+                        <h4 class="text-xl font-semibold mb-2">Slow Response Time</h4>
+                        <p class="text-slate-600">Inability to react instantly to changing footfall, leaving stores empty during slow hours.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl text-blue-500 mb-4">🚶‍♂️</div>
+                        <h4 class="text-xl font-semibold mb-2">Missed Opportunities</h4>
+                        <p class="text-slate-600">Thousands of potential customers are nearby, yet businesses lack the tools to attract them in real-time.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="text-4xl text-blue-500 mb-4">🤝</div>
+                        <h4 class="text-xl font-semibold mb-2">Lack of Cooperation</h4>
+                        <p class="text-slate-600">Limited tools for businesses to collaborate, cross-promote, and create a synergistic shopping environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">The COUPOZ Growth Engine</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Our platform provides a powerful, data-driven solution designed for immediate impact through three key mechanisms.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-8 border border-slate-200 rounded-lg bg-slate-50">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h4 class="text-xl font-semibold mb-2">Real-Time Campaign Management</h4>
+                        <p class="text-slate-600">Activate and stop promotions in minutes. Run short-term campaigns (e.g., 10 minutes or first 5 customers) to get an immediate boost during low-traffic hours.</p>
+                    </div>
+                    <div class="p-8 border border-slate-200 rounded-lg bg-slate-50">
+                        <div class="text-3xl mb-4">🔄</div>
+                        <h4 class="text-xl font-semibold mb-2">Synergistic Collaborations</h4>
+                        <p class="text-slate-600">Customers of one business automatically receive offers for complementary stores (e.g., movie ticket → restaurant discount), increasing foot traffic for all parties.</p>
+                    </div>
+                    <div class="p-8 border border-slate-200 rounded-lg bg-slate-50">
+                        <div class="text-3xl mb-4">🎯</div>
+                        <h4 class="text-xl font-semibold mb-2">Location-Based Targeting</h4>
+                        <p class="text-slate-600">Identify potential customers in a defined radius and even pinpoint their exact indoor location within a mall (via Wi-Fi) for hyper-relevant, real-time offers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="financials" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">Financial Projections & Vision</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Our model is built for rapid, scalable growth, starting with a strong pilot and expanding globally.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="stat-card text-center lg:col-span-1">
+                        <h4 class="text-lg font-medium text-slate-500">Funding Ask (Seed)</h4>
+                        <p class="text-5xl font-bold text-blue-500 my-2">$100K</p>
+                        <p class="text-slate-600">To fund MVP, initial marketing, and Year 1 operations.</p>
+                    </div>
+                    <div class="stat-card text-center lg:col-span-2">
+                        <h4 class="text-lg font-medium text-slate-500">Projected Year 1 Revenue</h4>
+                        <p class="text-5xl font-bold text-green-500 my-2">$4.15M</p>
+                        <p class="text-slate-600">From 5 pilot malls in Thailand, focusing on market validation.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <button id="totalRevenueBtn" class="px-4 py-2 text-sm font-medium bg-blue-500 text-white rounded-md">Total Revenue</button>
+                        <button id="subscriptionBtn" class="px-4 py-2 text-sm font-medium bg-slate-200 text-slate-700 rounded-md">Subscription</button>
+                        <button id="redemptionBtn" class="px-4 py-2 text-sm font-medium bg-slate-200 text-slate-700 rounded-md">Redemption Fees</button>
+                        <button id="adsBtn" class="px-4 py-2 text-sm font-medium bg-slate-200 text-slate-700 rounded-md">Advertising</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="financialsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="the-plan" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">Our 12-Month Roadmap</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">A phased approach to build, validate, and scale our platform.</p>
+                </div>
+                <div id="roadmapContainer" class="max-w-3xl mx-auto">
+                    <div class="roadmap-item border-l-4 border-blue-500 pl-6 pb-8 relative">
+                         <div class="absolute -left-[11px] top-0 w-5 h-5 bg-blue-500 rounded-full border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold cursor-pointer">Phase 1 (Months 0-4): MVP & Initial Pilot</h4>
+                        <div class="roadmap-content text-slate-600">
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Core campaign creation & redemption functionality.</li>
+                                <li>Basic location targeting (geo-fencing).</li>
+                                <li>Real-time analytics dashboard (beta).</li>
+                                <li>Launch initial Android & iOS apps.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="roadmap-item border-l-4 border-slate-300 pl-6 pb-8 relative">
+                        <div class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-300 rounded-full border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold cursor-pointer">Phase 2 (Months 5-8): Advanced Features & Optimization</h4>
+                         <div class="roadmap-content text-slate-600">
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Enhanced analytics and custom reporting.</li>
+                                <li>Smart push notification triggers with AI optimization.</li>
+                                <li>UI/UX refinement based on pilot feedback.</li>
+                                <li>Improve indoor positioning accuracy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="roadmap-item border-l-4 border-slate-300 pl-6 relative">
+                        <div class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-300 rounded-full border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold cursor-pointer">Phase 3 (Months 9-12): Scale & Expansion Readiness</h4>
+                         <div class="roadmap-content text-slate-600">
+                            <ul class="list-disc pl-5 mt-2 space-y-1">
+                                <li>Develop Public API for third-party integrations.</li>
+                                <li>Add extended targeting parameters (e.g., purchase history).</li>
+                                <li>Platform scalability improvements for large-scale launch.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">The Team</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">A blend of technical expertise, market knowledge, and design excellence.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="stat-card text-center">
+                        <div class="w-24 h-24 rounded-full bg-slate-200 mx-auto mb-4 flex items-center justify-center text-slate-500">CEO</div>
+                        <h4 class="text-lg font-bold">Roni</h4>
+                        <p class="text-blue-500 font-medium">Founder & CEO</p>
+                        <p class="text-sm text-slate-600 mt-2">25+ years in software, expert in real-time systems and mobile development.</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="w-24 h-24 rounded-full bg-slate-200 mx-auto mb-4 flex items-center justify-center text-slate-500">CTO</div>
+                        <h4 class="text-lg font-bold">CTO</h4>
+                        <p class="text-blue-500 font-medium">Chief Technology Officer</p>
+                        <p class="text-sm text-slate-600 mt-2">Expert in DevOps, Kubernetes, and cybersecurity for scalable platforms.</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="w-24 h-24 rounded-full bg-slate-200 mx-auto mb-4 flex items-center justify-center text-slate-500">CMO</div>
+                        <h4 class="text-lg font-bold">CMO</h4>
+                        <p class="text-blue-500 font-medium">Chief Marketing Officer</p>
+                        <p class="text-sm text-slate-600 mt-2">Digital marketing specialist with deep experience in Asian markets.</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="w-24 h-24 rounded-full bg-slate-200 mx-auto mb-4 flex items-center justify-center text-slate-500">UI/UX</div>
+                        <h4 class="text-lg font-bold">UI/UX Lead</h4>
+                        <p class="text-blue-500 font-medium">Design Lead</p>
+                        <p class="text-sm text-slate-600 mt-2">Expert in creating intuitive and engaging mobile user experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-features" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">✨ AI-Powered Features ✨</h3>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Leveraging cutting-edge AI to empower businesses with smarter campaign creation and content generation.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                    <h4 class="text-xl font-semibold mb-4">Campaign Idea Generator</h4>
+                    <p class="text-slate-600 mb-6">Input details about your business and offer, and our AI will generate creative campaign ideas and marketing copy.</p>
+                    <div class="flex justify-center mb-6">
+                        <img src="uploaded:Gemini_Generated_Image_stgsmstgsmstgsms.jpg-c00e5c83-6873-4ea8-968c-35c13ffc960f" alt="AI Feature Illustration" class="w-48 h-48 rounded-lg object-cover">
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="productService" class="block text-sm font-medium text-slate-700">Product/Service:</label>
+                            <input type="text" id="productService" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="e.g., 'Coffee Shop - Latte'">
+                        </div>
+                        <div>
+                            <label for="offerType" class="block text-sm font-medium text-slate-700">Offer Type:</label>
+                            <input type="text" id="offerType" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="e.g., 'Buy one get one free'">
+                        </div>
+                        <div>
+                            <label for="targetAudience" class="block text-sm font-medium text-slate-700">Target Audience:</label>
+                            <input type="text" id="targetAudience" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="e.g., 'Students, Morning Commuters'">
+                        </div>
+                        <button id="generateCampaignBtn" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-transform duration-300 transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <span>✨ Generate Campaign Ideas</span>
+                            <div id="aiLoadingSpinner" class="loading-spinner hidden"></div>
+                        </button>
+                    </div>
+                    <div id="campaignIdeasOutput" class="mt-8 p-4 bg-white border border-slate-200 rounded-md text-slate-800 min-h-[100px] overflow-auto">
+                        Your AI-generated campaign ideas will appear here.
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <footer id="contact" class="bg-slate-800 text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold">Join Us in Redefining Retail</h3>
+            <p class="mt-4 max-w-xl mx-auto text-slate-300">We are seeking $100,000 to launch our pilot, validate our model, and scale rapidly. Let's build the future of physical commerce together.</p>
+            <div class="mt-8">
+                 <a href="mailto:invest@coupoz.com" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300 inline-block transform hover:scale-105">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const financialData = {
+                labels: ['Year 1', 'Year 2', 'Year 3 (Global)'],
+                datasets: {
+                    totalRevenue: {
+                        label: 'Total Revenue ($M)',
+                        data: [4.15, 20.2, 166.1],
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    },
+                    subscription: {
+                        label: 'Subscription Revenue ($M)',
+                        data: [3.0, 15.0, 105.6],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 1
+                    },
+                    redemption: {
+                        label: 'Redemption Fees ($M)',
+                        data: [0.15, 1.2, 15.5],
+                        backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                        borderColor: 'rgba(245, 158, 11, 1)',
+                        borderWidth: 1
+                    },
+                    ads: {
+                        label: 'Advertising / Premium ($M)',
+                        data: [1.0, 4.0, 45.0],
+                        backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                        borderColor: 'rgba(139, 92, 246, 1)',
+                        borderWidth: 1
+                    }
+                }
+            };
+
+            const ctx = document.getElementById('financialsChart').getContext('2d');
+            const financialsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: financialData.labels,
+                    datasets: [financialData.datasets.totalRevenue]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value + 'M';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y + 'M';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const buttons = [
+                { id: 'totalRevenueBtn', dataKey: 'totalRevenue' },
+                { id: 'subscriptionBtn', dataKey: 'subscription' },
+                { id: 'redemptionBtn', dataKey: 'redemption' },
+                { id: 'adsBtn', dataKey: 'ads' }
+            ];
+
+            buttons.forEach(btnInfo => {
+                document.getElementById(btnInfo.id).addEventListener('click', () => {
+                    financialsChart.data.datasets = [financialData.datasets[btnInfo.dataKey]];
+                    financialsChart.update();
+                    
+                    buttons.forEach(b => {
+                        const el = document.getElementById(b.id);
+                        if (b.id === btnInfo.id) {
+                            el.classList.remove('bg-slate-200', 'text-slate-700');
+                            el.classList.add('bg-blue-500', 'text-white');
+                        } else {
+                            el.classList.add('bg-slate-200', 'text-slate-700');
+                            el.classList.remove('bg-blue-500', 'text-white');
+                        }
+                    });
+                });
+            });
+
+            const roadmapContainer = document.getElementById('roadmapContainer');
+            const roadmapItems = roadmapContainer.querySelectorAll('.roadmap-item');
+
+            roadmapItems.forEach((item, index) => {
+                if (index === 0) {
+                    item.classList.add('active');
+                }
+                const header = item.querySelector('h4');
+                header.addEventListener('click', () => {
+                    roadmapItems.forEach(i => {
+                        if (i !== item) {
+                            i.classList.remove('active');
+                            i.classList.replace('border-blue-500', 'border-slate-300');
+                            i.querySelector('.absolute').classList.replace('bg-blue-500', 'bg-slate-300');
+                        }
+                    });
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        item.classList.replace('border-slate-300', 'border-blue-500');
+                        item.querySelector('.absolute').classList.replace('bg-slate-300', 'bg-blue-500');
+                    } else {
+                        item.classList.replace('border-blue-500', 'border-slate-300');
+                         item.querySelector('.absolute').classList.replace('bg-blue-500', 'bg-slate-300');
+                    }
+                });
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active-nav');
+                    }
+                });
+            });
+
+            // Gemini API Integration Logic
+            const generateCampaignBtn = document.getElementById('generateCampaignBtn');
+            const productServiceInput = document.getElementById('productService');
+            const offerTypeInput = document.getElementById('offerType');
+            const targetAudienceInput = document.getElementById('targetAudience');
+            const campaignIdeasOutput = document.getElementById('campaignIdeasOutput');
+            const aiLoadingSpinner = document.getElementById('aiLoadingSpinner');
+
+            generateCampaignBtn.addEventListener('click', async () => {
+                const productService = productServiceInput.value.trim();
+                const offerType = offerTypeInput.value.trim();
+                const targetAudience = targetAudienceInput.value.trim();
+
+                if (!productService || !offerType) {
+                    campaignIdeasOutput.innerText = "Please provide at least a product/service and an offer type.";
+                    return;
+                }
+
+                aiLoadingSpinner.classList.remove('hidden');
+                generateCampaignBtn.disabled = true;
+                campaignIdeasOutput.innerText = "Generating ideas...";
+
+                const prompt = `Generate a few creative campaign ideas and marketing copy for a physical business using a coupon system like CoupoZ.
+                Product/Service: ${productService}
+                Offer Type: ${offerType}
+                Target Audience: ${targetAudience || 'General public'}
+
+                Provide 3 distinct campaign ideas, each with a catchy title, a brief description, and a short, compelling marketing message (e.g., for a push notification or in-app banner).`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // If you want to use models other than gemini-2.5-flash-preview-05-20 or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                let retryCount = 0;
+                const maxRetries = 3;
+                const baseDelay = 1000; // 1 second
+
+                async function fetchWithExponentialBackoff(url, options) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (!response.ok) {
+                            if (response.status === 429 && retryCount < maxRetries) {
+                                const delay = baseDelay * Math.pow(2, retryCount);
+                                await new Promise(resolve => setTimeout(resolve, delay));
+                                retryCount++;
+                                return fetchWithExponentialBackoff(url, options); // Retry
+                            }
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    } catch (error) {
+                        throw error;
+                    }
+                }
+
+                try {
+                    const result = await fetchWithExponentialBackoff(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        campaignIdeasOutput.innerText = text;
+                    } else {
+                        campaignIdeasOutput.innerText = "Could not generate ideas. Please try again or refine your input.";
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    campaignIdeasOutput.innerText = "Error generating ideas. Please check your connection or try again later.";
+                } finally {
+                    aiLoadingSpinner.classList.add('hidden');
+                    generateCampaignBtn.disabled = false;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
