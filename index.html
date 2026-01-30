@@ -84,7 +84,7 @@
     <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <img src="uploaded:coupon_admin_logo.jpg-270dcca3-e93d-42cd-bb22-83e91c20fa52" alt="CoupoZ Admin Logo" class="h-10 w-10 rounded-full">
+                <div class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg">C</div>
                 <h1 class="text-2xl font-bold text-slate-800">COUPOZ</h1>
             </div>
             <div class="hidden md:flex space-x-8">
@@ -95,13 +95,28 @@
                 <a href="#team" class="nav-link text-slate-600 font-medium pb-1">Team</a>
                 <a href="#ai-features" class="nav-link text-slate-600 font-medium pb-1">AI Features</a>
             </div>
+            <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600 hover:text-blue-500 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </nav>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-200">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#opportunity" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">The Opportunity</a>
+                <a href="#how-it-works" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">How It Works</a>
+                <a href="#financials" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">Financials</a>
+                <a href="#the-plan" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">The Plan</a>
+                <a href="#team" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">Team</a>
+                <a href="#ai-features" class="mobile-nav-link text-slate-600 font-medium py-2 hover:text-blue-500">AI Features</a>
+            </div>
+        </div>
     </header>
 
     <main>
         <section id="hero" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-6 text-center">
-                <img src="uploaded:coupoz_512.png-ad3e59cd-2a5b-446d-af7b-f9250b7b31e4" alt="CoupoZ Main Logo" class="h-24 w-24 md:h-32 md:w-32 mx-auto mb-6">
+                <div class="h-24 w-24 md:h-32 md:w-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-4xl md:text-5xl shadow-lg">C</div>
                 <h2 class="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">Real-Time Growth for Physical Businesses</h2>
                 <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Empowering retail with instant campaigns and hyper-targeted offers to turn foot traffic into predictable revenue.</p>
                 <div class="mt-10">
@@ -287,7 +302,9 @@
                     <h4 class="text-xl font-semibold mb-4">Campaign Idea Generator</h4>
                     <p class="text-slate-600 mb-6">Input details about your business and offer, and our AI will generate creative campaign ideas and marketing copy.</p>
                     <div class="flex justify-center mb-6">
-                        <img src="uploaded:Gemini_Generated_Image_stgsmstgsmstgsms.jpg-c00e5c83-6873-4ea8-968c-35c13ffc960f" alt="AI Feature Illustration" class="w-48 h-48 rounded-lg object-cover">
+                        <div class="w-48 h-48 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+                            <span class="text-6xl">🤖</span>
+                        </div>
                     </div>
                     <div class="space-y-4">
                         <div>
@@ -328,6 +345,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
             const financialData = {
                 labels: ['Year 1', 'Year 2', 'Year 3 (Global)'],
                 datasets: {
