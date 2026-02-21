@@ -1,0 +1,8 @@
+# robots.txt for CoupoZ
+# Replace https://coupoz.com with your actual domain if you use a custom one.
+# See README.md section D for how to update this after a domain change.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://coupoz.com/sitemap.xml
