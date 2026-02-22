@@ -441,11 +441,12 @@
     document.documentElement.setAttribute('lang', lang);
     // Persist choice
     localStorage.setItem('lang', lang);
-    // Update button label
-    var btn = document.getElementById('lang-toggle');
-    if (btn) {
-      btn.textContent = lang === 'en' ? 'ไทย' : 'EN';
-      btn.setAttribute('aria-label', lang === 'en' ? 'Switch to Thai' : 'Switch to English');
+    // Update active language indicator
+    var enSpan = document.getElementById('lang-en');
+    var thSpan = document.getElementById('lang-th');
+    if (enSpan && thSpan) {
+      enSpan.className = lang === 'en' ? 'text-brand-500 font-bold' : 'text-gray-400 dark:text-gray-500';
+      thSpan.className = lang === 'th' ? 'text-brand-500 font-bold' : 'text-gray-400 dark:text-gray-500';
     }
   }
 
