@@ -89,33 +89,33 @@
     var trigger = item.querySelector('.faq-trigger');
     var answer  = item.querySelector('.faq-answer');
 
-    if (!trigger || !answer) return;
+    if (trigger && answer) {
+      // Wrap answer content for animation
+      var inner = document.createElement('div');
+      inner.className = 'faq-answer-inner';
+      // Move children into inner wrapper
+      while (answer.firstChild) {
+        inner.appendChild(answer.firstChild);
+      }
+      answer.appendChild(inner);
+      answer.removeAttribute('hidden');
 
-    // Wrap answer content for animation
-    var inner = document.createElement('div');
-    inner.className = 'faq-answer-inner';
-    // Move children into inner wrapper
-    while (answer.firstChild) {
-      inner.appendChild(answer.firstChild);
-    }
-    answer.appendChild(inner);
-    answer.removeAttribute('hidden');
+      trigger.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
 
-    trigger.addEventListener('click', function () {
-      var isOpen = item.classList.contains('open');
+        // Close all others
+        faqItems.forEach(function (other) {
+          if (other !== item) {
+            other.classList.remove('open');
+            var otherTrigger = other.querySelector('.faq-trigger');
+            if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+          }
+        });
 
-      // Close all others
-      faqItems.forEach(function (other) {
-        if (other !== item) {
-          other.classList.remove('open');
-          var otherTrigger = other.querySelector('.faq-trigger');
-          if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
-        }
+        item.classList.toggle('open', !isOpen);
+        trigger.setAttribute('aria-expanded', String(!isOpen));
       });
-
-      item.classList.toggle('open', !isOpen);
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-    });
+    }
   });
 
   /* ---- Footer year ---- */
