@@ -394,10 +394,10 @@
 
     /* Toggle checkboxes */
     Object.keys(CB_MAP).forEach(function (id) {
-      el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('change', function () {
-          state[CB_MAP[id]] = el.checked;
+      var checkbox = document.getElementById(id);
+      if (checkbox) {
+        checkbox.addEventListener('change', function () {
+          state[CB_MAP[id]] = checkbox.checked;
           applyAll();
         });
       }
