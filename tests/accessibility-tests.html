@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoupoZ Accessibility Test Suite</title>
+  <!--
+    HOW TO RUN:
+    1. Serve the project root from a local HTTP server:
+         npx serve .           (Node)
+         python3 -m http.server (Python)
+    2. Open http://localhost:PORT/tests/accessibility-tests.html
+    3. Click "Run automated checks" — requires same-origin iframe access.
+
+    The manual checklist below can be used standalone at any time.
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.9.1/axe.min.js"
+          integrity="sha512-tSBbODKfyB2J+agfpwwx2AESG4FFXCc4nC7+gYtGiLO6hBiYOlEuqRVvdT4mkzM4sHk1bZ4ufRFf/WXLjHEw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f9fafb;
+      color: #111827;
+      line-height: 1.6;
+    }
+    h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.4rem; }
+    h3 { font-size: 1rem; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #6b7280; margin-top: 0; margin-bottom: 2rem; }
+    button {
+      background: #6C3EFF;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button:focus-visible { outline: 2px solid #6C3EFF; outline-offset: 3px; }
+    #status { font-size: 0.85rem; color: #6b7280; margin-top: 0.5rem; }
+    #axe-results { margin-top: 1rem; }
+    .pass { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; color: #166534; }
+    .fail { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; color: #991b1b; }
+    .fail summary { cursor: pointer; font-weight: 600; }
+    .fail-detail { margin-top: 0.5rem; font-size: 0.82rem; color: #7f1d1d; }
+    .fail-node { font-family: monospace; background: #fff; border: 1px solid #fca5a5; border-radius: 4px; padding: 0.2rem 0.4rem; display: block; margin-top: 0.25rem; word-break: break-all; }
+    .struct-pass { color: #166534; }
+    .struct-fail { color: #991b1b; font-weight: 600; }
+    .checklist label { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.6rem; cursor: pointer; font-size: 0.9rem; }
+    .checklist input[type=checkbox] { margin-top: 0.15rem; flex-shrink: 0; width: 1rem; height: 1rem; accent-color: #6C3EFF; }
+    .checklist .note { font-size: 0.78rem; color: #6b7280; display: block; padding-left: 1.6rem; margin-top: -0.35rem; }
+    .summary-bar { display: flex; gap: 1.5rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 1rem; }
+    .summary-bar span { font-size: 0.85rem; }
+    .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; margin-left: 0.4rem; text-transform: uppercase; }
+    .tag-critical { background: #fee2e2; color: #991b1b; }
+    .tag-serious  { background: #fef3c7; color: #92400e; }
+    .tag-moderate { background: #e0f2fe; color: #0369a1; }
+    .tag-minor    { background: #f3f4f6; color: #374151; }
+    #struct-results pre { background: #f3f4f6; border-radius: 6px; padding: 0.75rem; font-size: 0.8rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+  <h1>CoupoZ Accessibility Test Suite</h1>
+  <p class="subtitle">WCAG 2.2 AA · axe-core automated checks + structural assertions + manual checklist</p>
+
+  <!-- ============================================================
+       AUTOMATED: axe-core
+  ============================================================ -->
+  <h2>1. Automated axe-core audit (WCAG 2.2 AA)</h2>
+  <p>Tests <code>../index.html</code> via iframe. Requires a local HTTP server (same origin).</p>
+  <button id="run-axe" disabled>Run automated checks</button>
+  <p id="status">Waiting for test frame to load&hellip;</p>
+  <div id="axe-results" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ============================================================
+       AUTOMATED: structural checks (JS)
+  ============================================================ -->
+  <h2>2. Structural assertions</h2>
+  <p>These checks run against the iframe DOM once loaded.</p>
+  <button id="run-struct" disabled>Run structural checks</button>
+  <div id="struct-results" aria-live="polite" aria-atomic="false" style="margin-top:0.75rem;"></div>
+
+  <!-- ============================================================
+       MANUAL CHECKLIST
+  ============================================================ -->
+  <h2>3. Manual test checklist</h2>
+  <p>Check each item by testing the live page. Tick boxes persist in sessionStorage.</p>
+
+  <h3>Keyboard navigation (WCAG 2.1.1, 2.4.3, 2.4.7)</h3>
+  <div class="checklist" id="kb-checks">
+    <label><input type="checkbox" data-key="skip-link"> Skip-to-content link appears on first <kbd>Tab</kbd> press and moves focus to <code>#main-content</code>.<span class="note">Press Tab from address bar with the main page open.</span></label>
+    <label><input type="checkbox" data-key="tab-order"> Tabbing through the page follows a logical top-to-bottom, left-to-right order.<span class="note">Tab through every element without a mouse.</span></label>
+    <label><input type="checkbox" data-key="focus-visible"> Every interactive element (links, buttons, FAQ triggers) shows a clearly visible focus ring.<span class="note">Should be a 2px purple outline.</span></label>
+    <label><input type="checkbox" data-key="no-trap"> No keyboard trap exists — focus can always leave any component with Tab or Escape.<span class="note">Check the mobile menu in particular.</span></label>
+    <label><input type="checkbox" data-key="mobile-menu-kb"> Mobile menu opens with Enter/Space on hamburger button; nav links are reachable; menu closes when a link is activated.<span class="note">Resize to &lt;768px or DevTools mobile mode.</span></label>
+    <label><input type="checkbox" data-key="faq-kb"> FAQ accordion opens/closes with Enter/Space; aria-expanded updates; answer text becomes accessible when open.<span class="note">Tab to a trigger, press Space.</span></label>
+    <label><input type="checkbox" data-key="theme-kb"> Dark-mode toggle is reachable and activatable by keyboard.<span class="note">Tab to it, press Space or Enter.</span></label>
+    <label><input type="checkbox" data-key="lang-kb"> Language toggle is reachable and switches content on activation.<span class="note">Tab to EN/TH toggle, press Space.</span></label>
+  </div>
+
+  <h3>Screen reader (WCAG 1.1.1, 1.3.1, 4.1.2)</h3>
+  <div class="checklist">
+    <label><input type="checkbox" data-key="sr-landmarks"> Landmarks are announced correctly: banner, navigation, main, contentinfo.<span class="note">Use VoiceOver rotor (macOS) or NVDA Landmark shortcut.</span></label>
+    <label><input type="checkbox" data-key="sr-headings"> Headings list shows a logical hierarchy: H1 → H2 sections → H3 cards.<span class="note">VoiceOver rotor → Headings / NVDA → H key.</span></label>
+    <label><input type="checkbox" data-key="sr-faq-aria"> When FAQ is closed, screen reader does NOT read answer text. When open, it reads cleanly.<span class="note">aria-hidden should control this.</span></label>
+    <label><input type="checkbox" data-key="sr-lang-announce"> Switching language announces "Language changed to English" or the Thai equivalent via a live region.<span class="note">Listen while switching language.</span></label>
+    <label><input type="checkbox" data-key="sr-icons"> Decorative icons are not read aloud (aria-hidden). The CoupoZ logo link is announced as "CoupoZ home".<span class="note">Navigate to logo area.</span></label>
+    <label><input type="checkbox" data-key="sr-theme-label"> Dark-mode button label reflects current action: "Switch to dark mode" or "Switch to light mode".<span class="note">Tab to it and listen to VoiceOver/NVDA.</span></label>
+  </div>
+
+  <h3>Colour contrast (WCAG 1.4.3)</h3>
+  <div class="checklist">
+    <label><input type="checkbox" data-key="contrast-body"> Body text on white / dark backgrounds passes 4.5:1.<span class="note">Check with browser DevTools or a contrast checker extension.</span></label>
+    <label><input type="checkbox" data-key="contrast-sub"> Section subtitle text (#5C6370 on white) passes 4.5:1. Expected ratio: ~5.5:1.<span class="note">Use eyedropper in DevTools Computed → color.</span></label>
+    <label><input type="checkbox" data-key="contrast-metric"> Metric labels (rgba(255,255,255,0.95) on #6C3EFF) pass 4.5:1. Expected ratio: ~5.4:1.</label>
+    <label><input type="checkbox" data-key="contrast-brand"> Brand-500 (#6C3EFF) text on white backgrounds passes 3:1 for large/bold text where applicable.</label>
+  </div>
+
+  <h3>Reduced motion (WCAG 2.3.3)</h3>
+  <div class="checklist">
+    <label><input type="checkbox" data-key="motion-os"> Enable "Reduce motion" in OS settings (macOS: Accessibility → Display → Reduce motion).<span class="note">Then reload the page.</span></label>
+    <label><input type="checkbox" data-key="motion-cards"> Card hover effects (lift transform) are absent with reduced motion enabled.</label>
+    <label><input type="checkbox" data-key="motion-reveals"> Scroll-reveal elements appear immediately (no fade-in animation).</label>
+    <label><input type="checkbox" data-key="motion-faq"> FAQ accordion icon does not rotate; panel appears without transition.</label>
+  </div>
+
+  <h3>Zoom and responsive (WCAG 1.4.4)</h3>
+  <div class="checklist">
+    <label><input type="checkbox" data-key="zoom-200"> At 200% browser zoom, all content remains readable with no horizontal overflow or overlapping text.</label>
+    <label><input type="checkbox" data-key="mobile-tap"> On mobile, all tap targets are at least 44×44 px (CTA buttons, FAQ triggers, nav links).</label>
+  </div>
+
+  <h3>Language (WCAG 3.1.1, 3.1.2)</h3>
+  <div class="checklist">
+    <label><input type="checkbox" data-key="lang-attr"> <code>&lt;html lang="en"&gt;</code> is present on load; switches to <code>lang="th"</code> when TH is selected.</label>
+  </div>
+
+  <!-- ============================================================
+       HIDDEN TEST FRAME
+  ============================================================ -->
+  <iframe id="test-frame"
+          src="../index.html"
+          title="Test frame — index.html"
+          style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;"
+          tabindex="-1"
+          aria-hidden="true">
+  </iframe>
+
+  <script>
+    /* ---- Persist checkboxes in sessionStorage ---- */
+    document.querySelectorAll('.checklist input[type=checkbox]').forEach(function (cb) {
+      var key = 'a11y-test-' + cb.dataset.key;
+      if (sessionStorage.getItem(key) === 'true') cb.checked = true;
+      cb.addEventListener('change', function () {
+        sessionStorage.setItem(key, cb.checked);
+      });
+    });
+
+    /* ---- Frame load ---- */
+    var frame = document.getElementById('test-frame');
+    var statusEl = document.getElementById('status');
+    var runAxeBtn = document.getElementById('run-axe');
+    var runStructBtn = document.getElementById('run-struct');
+
+    frame.addEventListener('load', function () {
+      runAxeBtn.disabled = false;
+      runStructBtn.disabled = false;
+      statusEl.textContent = 'Test frame loaded. Click "Run automated checks" to start.';
+    });
+
+    /* ================================================================
+       axe-core automated tests
+    ================================================================ */
+    runAxeBtn.addEventListener('click', function () {
+      runAxeBtn.disabled = true;
+      statusEl.textContent = 'Running axe-core&hellip;';
+      var resultsDiv = document.getElementById('axe-results');
+      resultsDiv.innerHTML = '';
+
+      var frameDoc;
+      try {
+        frameDoc = frame.contentDocument || frame.contentWindow.document;
+      } catch (e) {
+        resultsDiv.innerHTML = '<p class="fail">Cannot access iframe (cross-origin block). Make sure you are serving from a local HTTP server at the same origin as index.html.</p>';
+        runAxeBtn.disabled = false;
+        statusEl.textContent = 'Error.';
+        return;
+      }
+
+      axe.run(frameDoc, {
+        runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] }
+      }, function (err, results) {
+        runAxeBtn.disabled = false;
+        if (err) {
+          statusEl.textContent = 'axe error: ' + err.message;
+          return;
+        }
+
+        var v = results.violations;
+        var p = results.passes;
+        var i = results.incomplete;
+
+        /* Summary bar */
+        var summaryHTML = '<div class="summary-bar">'
+          + '<span><strong>' + v.length + '</strong> violation' + (v.length !== 1 ? 's' : '') + '</span>'
+          + '<span><strong>' + p.length + '</strong> passed</span>'
+          + '<span><strong>' + i.length + '</strong> needs review</span>'
+          + '</div>';
+
+        /* Violations */
+        var violHTML = '';
+        if (v.length === 0) {
+          violHTML = '<p class="pass" style="margin-top:0.75rem;">&#10003; No violations found by axe-core for WCAG 2.2 AA ruleset.</p>';
+        } else {
+          v.forEach(function (rule) {
+            var impact = rule.impact || 'minor';
+            var tagClass = 'tag-' + impact;
+            var nodeList = rule.nodes.slice(0, 5).map(function (n) {
+              return '<code class="fail-node">' + escHtml(n.html) + '</code>';
+            }).join('');
+            violHTML += '<details class="fail" style="margin-top:0.5rem;">'
+              + '<summary>' + escHtml(rule.description)
+              + '<span class="tag ' + tagClass + '">' + impact + '</span></summary>'
+              + '<div class="fail-detail">'
+              + '<p><strong>Rule:</strong> ' + escHtml(rule.id) + ' &mdash; <a href="' + escHtml(rule.helpUrl) + '" target="_blank" rel="noopener">docs</a></p>'
+              + '<p><strong>Affected nodes (' + rule.nodes.length + '):</strong></p>'
+              + nodeList
+              + (rule.nodes.length > 5 ? '<p>&hellip;and ' + (rule.nodes.length - 5) + ' more.</p>' : '')
+              + '</div></details>';
+          });
+        }
+
+        /* Incomplete (needs review) */
+        var incHTML = '';
+        if (i.length > 0) {
+          incHTML = '<h3 style="margin-top:1rem;">Needs manual review (' + i.length + ')</h3>';
+          i.forEach(function (rule) {
+            incHTML += '<details class="fail" style="background:#fffbeb;border-color:#fde68a;color:#92400e;margin-top:0.4rem;">'
+              + '<summary>' + escHtml(rule.description) + '</summary>'
+              + '<div class="fail-detail" style="color:#78350f;">'
+              + '<p>' + escHtml(rule.help) + '</p>'
+              + '</div></details>';
+          });
+        }
+
+        resultsDiv.innerHTML = summaryHTML + violHTML + incHTML;
+        statusEl.textContent = 'axe-core run complete.';
+      });
+    });
+
+    /* ================================================================
+       Structural assertions (JS, runs against iframe DOM)
+    ================================================================ */
+    runStructBtn.addEventListener('click', function () {
+      var out = document.getElementById('struct-results');
+      out.innerHTML = '';
+      var doc;
+      try {
+        doc = frame.contentDocument || frame.contentWindow.document;
+      } catch (e) {
+        out.innerHTML = '<p class="fail">Cannot access iframe. Serve from a local HTTP server.</p>';
+        return;
+      }
+
+      var results = [];
+
+      function check(label, pass, detail) {
+        results.push({ label: label, pass: pass, detail: detail || '' });
+      }
+
+      /* 1. Single H1 */
+      var h1s = doc.querySelectorAll('h1');
+      check('Exactly one H1 on the page', h1s.length === 1,
+        'Found ' + h1s.length + ' H1 element(s).');
+
+      /* 2. H1 not empty */
+      check('H1 has non-empty text', h1s.length > 0 && h1s[0].textContent.trim().length > 0);
+
+      /* 3. Skip link exists */
+      var skipLink = doc.querySelector('a.skip-link');
+      check('Skip-to-content link present', !!skipLink,
+        skipLink ? 'href="' + skipLink.getAttribute('href') + '"' : 'Not found.');
+
+      /* 4. Skip link points to main */
+      var mainEl = doc.querySelector('main');
+      check('<main> has id="main-content"', mainEl && mainEl.id === 'main-content');
+
+      /* 5. lang attribute */
+      check('HTML lang attribute is "en"', doc.documentElement.lang === 'en',
+        'lang="' + doc.documentElement.lang + '"');
+
+      /* 6. nav landmark has aria-label */
+      var navs = Array.from(doc.querySelectorAll('nav'));
+      var labelledNavs = navs.filter(function (n) { return n.getAttribute('aria-label'); });
+      check('All <nav> elements have aria-label (' + navs.length + ' found)',
+        labelledNavs.length === navs.length,
+        labelledNavs.length + ' of ' + navs.length + ' labelled.');
+
+      /* 7. Mobile menu button has aria-expanded */
+      var menuBtn = doc.getElementById('mobile-menu-btn');
+      check('Mobile menu button has aria-expanded', menuBtn && menuBtn.hasAttribute('aria-expanded'));
+
+      /* 8. Mobile menu button has aria-controls */
+      check('Mobile menu button has aria-controls', menuBtn && !!menuBtn.getAttribute('aria-controls'));
+
+      /* 9. FAQ triggers have aria-expanded */
+      var faqTriggers = doc.querySelectorAll('.faq-trigger');
+      var triggersWithExpanded = Array.from(faqTriggers).filter(function (t) {
+        return t.hasAttribute('aria-expanded');
+      });
+      check('All FAQ triggers have aria-expanded (' + faqTriggers.length + ' found)',
+        triggersWithExpanded.length === faqTriggers.length);
+
+      /* 10. FAQ triggers have aria-controls */
+      var triggersWithControls = Array.from(faqTriggers).filter(function (t) {
+        return !!t.getAttribute('aria-controls');
+      });
+      check('All FAQ triggers have aria-controls',
+        triggersWithControls.length === faqTriggers.length,
+        triggersWithControls.length + ' of ' + faqTriggers.length + ' have it.');
+
+      /* 11. FAQ answer panels have matching ids */
+      var faqAnswers = doc.querySelectorAll('.faq-answer');
+      var answersWithId = Array.from(faqAnswers).filter(function (a) { return !!a.id; });
+      check('All FAQ answer panels have id attributes',
+        answersWithId.length === faqAnswers.length,
+        answersWithId.length + ' of ' + faqAnswers.length + ' have id.');
+
+      /* 12. Decorative SVGs have aria-hidden */
+      var allSvgs = doc.querySelectorAll('svg');
+      var svgsWithoutAriaHidden = Array.from(allSvgs).filter(function (svg) {
+        var hasRole = svg.hasAttribute('role') && svg.getAttribute('role') !== 'presentation';
+        var hidden = svg.getAttribute('aria-hidden') === 'true';
+        return !hasRole && !hidden;
+      });
+      check('All SVGs are either aria-hidden or have a meaningful role',
+        svgsWithoutAriaHidden.length === 0,
+        svgsWithoutAriaHidden.length + ' SVG(s) without aria-hidden or role. Review each to confirm they are truly decorative or have visible text equivalents.');
+
+      /* 13. Images have alt */
+      var imgs = doc.querySelectorAll('img');
+      var imgsWithoutAlt = Array.from(imgs).filter(function (img) {
+        return !img.hasAttribute('alt');
+      });
+      check('All <img> elements have alt (' + imgs.length + ' found)',
+        imgs.length === 0 || imgsWithoutAlt.length === 0,
+        imgs.length === 0 ? 'No <img> elements (uses inline SVG).' : imgsWithoutAlt.length + ' missing alt.');
+
+      /* 14. Buttons have accessible names */
+      var buttons = doc.querySelectorAll('button');
+      var unnamedBtns = Array.from(buttons).filter(function (b) {
+        var name = b.getAttribute('aria-label') || b.getAttribute('aria-labelledby') || b.textContent.trim();
+        return !name;
+      });
+      check('All buttons have accessible names (' + buttons.length + ' found)',
+        unnamedBtns.length === 0,
+        unnamedBtns.length + ' unnamed button(s).');
+
+      /* 15. Links have accessible names */
+      var links = doc.querySelectorAll('a[href]');
+      var unnamedLinks = Array.from(links).filter(function (a) {
+        var name = a.getAttribute('aria-label') || a.getAttribute('aria-labelledby') || a.textContent.trim();
+        return !name;
+      });
+      check('All links have accessible names (' + links.length + ' found)',
+        unnamedLinks.length === 0,
+        unnamedLinks.length + ' unnamed link(s).');
+
+      /* 16. lang-announcement live region */
+      var liveRegion = doc.getElementById('lang-announcement');
+      check('aria-live announcement region present',
+        liveRegion && liveRegion.getAttribute('aria-live') === 'polite');
+
+      /* 17. theme-toggle button accessible name present */
+      var themeToggle = doc.getElementById('theme-toggle');
+      check('Theme toggle has aria-label',
+        themeToggle && !!themeToggle.getAttribute('aria-label'));
+
+      /* Render */
+      var passCount = results.filter(function (r) { return r.pass; }).length;
+      var failCount = results.length - passCount;
+
+      var html = '<div class="summary-bar">'
+        + '<span><strong>' + failCount + '</strong> failed</span>'
+        + '<span><strong>' + passCount + '</strong> passed</span>'
+        + '</div>';
+
+      results.forEach(function (r) {
+        html += '<p class="' + (r.pass ? 'struct-pass' : 'struct-fail') + '" style="margin:0.35rem 0;">'
+          + (r.pass ? '&#10003; ' : '&#10007; ')
+          + escHtml(r.label)
+          + (r.detail ? ' <span style="font-weight:400;color:#6b7280;font-size:0.82rem;">— ' + escHtml(r.detail) + '</span>' : '')
+          + '</p>';
+      });
+
+      out.innerHTML = html;
+    });
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  </script>
+
+</body>
+</html>

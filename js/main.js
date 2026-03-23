@@ -18,6 +18,10 @@
       html.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+    // Keep aria-label in sync with the action the button will perform next
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
   }
 
   // Initialise from saved preference or system preference
@@ -41,6 +45,7 @@
       const isOpen = !mobileMenu.classList.contains('hidden');
       mobileMenu.classList.toggle('hidden', isOpen);
       menuBtn.setAttribute('aria-expanded', String(!isOpen));
+      menuBtn.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
     });
 
     // Close on nav link click
@@ -48,6 +53,7 @@
       link.addEventListener('click', function () {
         mobileMenu.classList.add('hidden');
         menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Open menu');
       });
     });
   }
@@ -62,7 +68,11 @@
 
   /* ---- Scroll-reveal (IntersectionObserver) ---- */
   var revealEls = document.querySelectorAll('.reveal');
-  if (revealEls.length && 'IntersectionObserver' in window) {
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    // CSS already makes .reveal immediately visible; this ensures JS state is consistent
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  } else if (revealEls.length && 'IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -99,6 +109,8 @@
       }
       answer.appendChild(inner);
       answer.removeAttribute('hidden');
+      // Panel content starts hidden from AT (max-height:0 alone is not AT-hidden)
+      answer.setAttribute('aria-hidden', 'true');
 
       trigger.addEventListener('click', function () {
         var isOpen = item.classList.contains('open');
@@ -108,12 +120,15 @@
           if (other !== item) {
             other.classList.remove('open');
             var otherTrigger = other.querySelector('.faq-trigger');
+            var otherAnswer  = other.querySelector('.faq-answer');
             if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            if (otherAnswer)  otherAnswer.setAttribute('aria-hidden', 'true');
           }
         });
 
         item.classList.toggle('open', !isOpen);
         trigger.setAttribute('aria-expanded', String(!isOpen));
+        answer.setAttribute('aria-hidden', String(isOpen)); // isOpen=true means we are closing
       });
     }
   });
@@ -287,7 +302,8 @@
       'footer.contact':   'Contact',
       'footer.linkedin':  'LinkedIn (coming soon)',
       'footer.copy':      'All rights reserved.',
-      'footer.built':     'Built for malls, stores, and shoppers.'
+      'footer.built':     'Built for malls, stores, and shoppers.',
+      'footer.a11y':      'Accessibility'
     },
 
     th: {
@@ -424,7 +440,8 @@
       'footer.contact':   'ติดต่อ',
       'footer.linkedin':  'LinkedIn (เร็วๆ นี้)',
       'footer.copy':      'สงวนลิขสิทธิ์',
-      'footer.built':     'สร้างมาสำหรับห้างฯ ร้านค้า และนักช้อป'
+      'footer.built':     'สร้างมาสำหรับห้างฯ ร้านค้า และนักช้อป',
+      'footer.a11y':      'การเข้าถึง'
     }
   };
 
@@ -447,6 +464,17 @@
     if (enSpan && thSpan) {
       enSpan.className = lang === 'en' ? 'text-brand-500 font-bold' : 'text-gray-400 dark:text-gray-500';
       thSpan.className = lang === 'th' ? 'text-brand-500 font-bold' : 'text-gray-400 dark:text-gray-500';
+    }
+    // Update lang-toggle aria-label to reflect current state and next action
+    var langToggleBtn = document.getElementById('lang-toggle');
+    if (langToggleBtn) {
+      langToggleBtn.setAttribute('aria-label',
+        lang === 'en' ? 'Language: English. Switch to Thai' : 'ภาษา: ไทย. Switch to English');
+    }
+    // Announce the language change to screen readers via the live region
+    var announcement = document.getElementById('lang-announcement');
+    if (announcement) {
+      announcement.textContent = lang === 'en' ? 'Language changed to English' : 'เปลี่ยนภาษาเป็นภาษาไทย';
     }
   }
 
