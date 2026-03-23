@@ -62,6 +62,23 @@
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Accessibility settings: early apply to prevent flash on reload -->
+  <script>
+    (function () {
+      var s = localStorage.getItem('cz-a11y');
+      if (!s) return;
+      try {
+        var p = JSON.parse(s), h = document.documentElement;
+        if (p.textSize) h.style.fontSize = (100 + p.textSize * 10) + '%';
+        if (p.highContrast)   h.classList.add('a11y-high-contrast');
+        if (p.underlineLinks) h.classList.add('a11y-underline-links');
+        if (p.reduceMotion)   h.classList.add('a11y-reduce-motion');
+        if (p.readableText)   h.classList.add('a11y-readable-text');
+        if (p.readableFont)   h.classList.add('a11y-readable-font');
+      } catch (e) {}
+    }());
+  </script>
+
   <!-- Fallback: make reveal elements visible if JS is unavailable or slow -->
   <noscript>
     <style>
@@ -737,6 +754,7 @@
     </div>
   </footer>
 
+  <script src="js/a11y-toolbar.js" defer></script>
   <script src="js/main.js"></script>
 </body>
 </html>
