@@ -40,6 +40,23 @@
 
   <!-- Custom styles (focus rules, skip link, sr-only) -->
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Accessibility settings: early apply to prevent flash on reload -->
+  <script>
+    (function () {
+      var s = localStorage.getItem('cz-a11y');
+      if (!s) return;
+      try {
+        var p = JSON.parse(s), h = document.documentElement;
+        if (p.textSize) h.style.fontSize = (100 + p.textSize * 10) + '%';
+        if (p.highContrast)   h.classList.add('a11y-high-contrast');
+        if (p.underlineLinks) h.classList.add('a11y-underline-links');
+        if (p.reduceMotion)   h.classList.add('a11y-reduce-motion');
+        if (p.readableText)   h.classList.add('a11y-readable-text');
+        if (p.readableFont)   h.classList.add('a11y-readable-font');
+      } catch (e) {}
+    }());
+  </script>
 </head>
 <body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans antialiased">
 
@@ -135,6 +152,7 @@
             <li>Respected <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">prefers-reduced-motion</code> by disabling scroll-reveal animations and card hover transforms for users who request reduced motion.</li>
             <li>Ensured the <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">lang</code> attribute on <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;html&gt;</code> is updated dynamically when the language is switched (English / Thai).</li>
             <li>Used native <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;button&gt;</code> and <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;a&gt;</code> elements for all interactive controls — no <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">div</code> click handlers.</li>
+            <li>Added an in-house <strong>accessibility options panel</strong> — a floating button (bottom-left) that opens a small display-and-motion preferences panel. Options include text size adjustment, high contrast, link underlining, reduced motion, comfortable text spacing, and an alternative readable font. Settings are saved in <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">localStorage</code>, can be reset at any time, and do not require sign-in. The panel is fully keyboard accessible with a focus trap and Escape key support.</li>
           </ul>
         </section>
 
@@ -216,6 +234,7 @@
     </div>
   </footer>
 
+  <script src="js/a11y-toolbar.js" defer></script>
   <script>
     // Minimal: dynamic year + dark mode init (no full main.js dependency needed here)
     document.getElementById('footer-year').textContent = new Date().getFullYear();

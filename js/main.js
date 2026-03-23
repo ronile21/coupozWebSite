@@ -456,6 +456,8 @@
     });
     // Update html lang attribute
     document.documentElement.setAttribute('lang', lang);
+    // Notify the accessibility toolbar so it can update its labels
+    document.dispatchEvent(new CustomEvent('cz:langchange'));
     // Persist choice
     localStorage.setItem('lang', lang);
     // Update active language indicator

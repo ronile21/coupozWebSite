@@ -471,3 +471,506 @@ button:focus-visible {
     font-size: 1.75rem;
   }
 }
+
+/* =============================================================
+   ACCESSIBILITY TOOLBAR
+   Floating button (bottom-left) + slide-up panel.
+   All selectors are prefixed with .a11y- to avoid conflicts.
+   ============================================================= */
+
+/* ---- Floating toggle button ---- */
+.a11y-btn {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 9000;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--brand-500);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(108, 62, 255, 0.45);
+  transition: background 0.2s ease, box-shadow 0.2s ease,
+              transform 0.15s ease;
+}
+
+.a11y-btn:hover {
+  background: var(--brand-600);
+  box-shadow: 0 4px 18px rgba(108, 62, 255, 0.55);
+  transform: scale(1.06);
+}
+
+.a11y-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--brand-500);
+}
+
+/* ---- Panel container ---- */
+.a11y-panel {
+  position: fixed;
+  bottom: 5rem;
+  left: 1.25rem;
+  z-index: 9001;
+  width: 16.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.a11y-panel[aria-hidden="false"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dark .a11y-panel {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Panel header ---- */
+.a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dark .a11y-panel-header {
+  border-bottom-color: #374151;
+}
+
+.a11y-panel-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #374151;
+}
+
+.dark .a11y-panel-title {
+  color: #d1d5db;
+}
+
+/* ---- Close button ---- */
+.a11y-close {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.a11y-close:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.dark .a11y-close {
+  color: #9ca3af;
+}
+
+.dark .a11y-close:hover {
+  background: #374151;
+  color: #f9fafb;
+}
+
+.a11y-close:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+/* ---- Panel body ---- */
+.a11y-panel-body {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+/* ---- Text-size row ---- */
+.a11y-text-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.25rem;
+}
+
+.a11y-text-label {
+  flex: 1;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.dark .a11y-text-label {
+  color: #d1d5db;
+}
+
+.a11y-size-display {
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 2.75rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.dark .a11y-size-display {
+  color: #9ca3af;
+}
+
+/* ---- Step buttons (text +/-) ---- */
+.a11y-step-btn {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.a11y-step-btn:hover:not(:disabled) {
+  background: #f0ebff;
+  border-color: var(--brand-500);
+  color: var(--brand-500);
+}
+
+.a11y-step-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.dark .a11y-step-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.dark .a11y-step-btn:hover:not(:disabled) {
+  background: rgba(108, 62, 255, 0.2);
+  border-color: var(--brand-500);
+  color: #a78bfa;
+}
+
+.a11y-step-btn:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+/* ---- Toggle row (label + switch) ---- */
+.a11y-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.a11y-toggle-row:hover {
+  background: #f9fafb;
+}
+
+.dark .a11y-toggle-row:hover {
+  background: #374151;
+}
+
+.a11y-toggle-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.4;
+  user-select: none;
+}
+
+.dark .a11y-toggle-label {
+  color: #d1d5db;
+}
+
+/* ---- Toggle switch (visual) ---- */
+.a11y-switch {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+}
+
+.a11y-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.a11y-switch-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: #d1d5db;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.a11y-switch input:checked + .a11y-switch-track {
+  background: var(--brand-500);
+}
+
+.a11y-switch input:focus-visible + .a11y-switch-track {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.a11y-switch-track::after {
+  content: '';
+  position: absolute;
+  left: 0.125rem;
+  top: 0.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+.a11y-switch input:checked + .a11y-switch-track::after {
+  transform: translateX(1.125rem);
+}
+
+/* ---- Divider ---- */
+.a11y-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin: 0.25rem 0;
+}
+
+.dark .a11y-divider {
+  background: #374151;
+}
+
+/* ---- Reset button ---- */
+.a11y-reset-btn {
+  width: 100%;
+  padding: 0.4375rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: transparent;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  margin-top: 0.125rem;
+}
+
+.a11y-reset-btn:hover {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.dark .a11y-reset-btn {
+  border-color: #4b5563;
+  color: #9ca3af;
+}
+
+.dark .a11y-reset-btn:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #f87171;
+  border-color: #f87171;
+}
+
+.a11y-reset-btn:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+/* =============================================================
+   ACCESSIBILITY FEATURE CLASSES
+   Applied to <html> element and cascade into the whole page.
+   All use !important to override Tailwind utility classes.
+   ============================================================= */
+
+/* ---- High contrast ---- */
+html.a11y-high-contrast * {
+  color: #fff !important;
+}
+
+html.a11y-high-contrast body {
+  background-color: #000 !important;
+}
+
+html.a11y-high-contrast header,
+html.a11y-high-contrast #site-header,
+html.a11y-high-contrast #mobile-menu {
+  background-color: #0a0a0a !important;
+  border-color: #444 !important;
+}
+
+html.a11y-high-contrast footer {
+  background-color: #0a0a0a !important;
+}
+
+html.a11y-high-contrast section,
+html.a11y-high-contrast main {
+  background-color: #000 !important;
+  background-image: none !important;
+}
+
+/* Cards get a slightly lighter bg for visual separation */
+html.a11y-high-contrast .problem-card,
+html.a11y-high-contrast .step-card,
+html.a11y-high-contrast .use-case-card,
+html.a11y-high-contrast .faq-item {
+  background-color: #111 !important;
+  border-color: #555 !important;
+}
+
+html.a11y-high-contrast .metric-card {
+  background-color: #111 !important;
+  border: 1px solid #555 !important;
+  backdrop-filter: none !important;
+}
+
+/* Links: yellow for strong contrast against black */
+html.a11y-high-contrast a:not(.a11y-btn):not(.a11y-close):not(.a11y-reset-btn) {
+  color: #ffff00 !important;
+}
+
+html.a11y-high-contrast a:focus-visible,
+html.a11y-high-contrast button:focus-visible {
+  outline-color: #ffff00 !important;
+}
+
+/* Keep toolbar panel readable in high-contrast mode */
+html.a11y-high-contrast .a11y-panel {
+  background-color: #1c1c1c !important;
+  border-color: #555 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
+}
+
+html.a11y-high-contrast .a11y-panel-header {
+  border-bottom-color: #444 !important;
+}
+
+html.a11y-high-contrast .a11y-step-btn {
+  background-color: #2a2a2a !important;
+  border-color: #666 !important;
+}
+
+html.a11y-high-contrast .a11y-divider {
+  background-color: #444 !important;
+}
+
+html.a11y-high-contrast .a11y-switch-track {
+  background-color: #555 !important;
+}
+
+html.a11y-high-contrast .a11y-switch input:checked + .a11y-switch-track {
+  background-color: #7c5cff !important;
+}
+
+html.a11y-high-contrast .a11y-toggle-row:hover {
+  background-color: #2a2a2a !important;
+}
+
+html.a11y-high-contrast .a11y-reset-btn {
+  border-color: #555 !important;
+}
+
+html.a11y-high-contrast .a11y-btn {
+  background-color: #4400cc !important;
+  box-shadow: 0 2px 12px rgba(68, 0, 204, 0.6) !important;
+}
+
+/* ---- Underline links ---- */
+html.a11y-underline-links a {
+  text-decoration: underline !important;
+}
+
+/* ---- Reduce motion (JS-triggered; mirrors prefers-reduced-motion) ---- */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-reduce-motion .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html.a11y-reduce-motion .faq-answer-inner {
+  transition: none !important;
+}
+
+html.a11y-reduce-motion .a11y-panel {
+  transition: none !important;
+}
+
+/* ---- Comfortable text spacing ---- */
+html.a11y-readable-text body {
+  line-height: 1.85 !important;
+  letter-spacing: 0.02em !important;
+  word-spacing: 0.1em !important;
+}
+
+html.a11y-readable-text p,
+html.a11y-readable-text li,
+html.a11y-readable-text .section-sub,
+html.a11y-readable-text .faq-answer {
+  max-width: 68ch;
+}
+
+/* ---- Readable font (Verdana — wider letterforms, good readability) ---- */
+html.a11y-readable-font,
+html.a11y-readable-font body,
+html.a11y-readable-font button,
+html.a11y-readable-font input,
+html.a11y-readable-font a {
+  font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif !important;
+}
+
+/* Restore Inter for the toolbar panel — keep it consistent */
+html.a11y-readable-font .a11y-panel,
+html.a11y-readable-font .a11y-panel * {
+  font-family: 'Inter', system-ui, sans-serif !important;
+}

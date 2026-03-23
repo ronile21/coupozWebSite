@@ -26,6 +26,26 @@
       border-radius: 4px;
     }
   </style>
+
+  <!-- Custom styles (accessibility feature classes) -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Accessibility settings: early apply to prevent flash on reload -->
+  <script>
+    (function () {
+      var s = localStorage.getItem('cz-a11y');
+      if (!s) return;
+      try {
+        var p = JSON.parse(s), h = document.documentElement;
+        if (p.textSize) h.style.fontSize = (100 + p.textSize * 10) + '%';
+        if (p.highContrast)   h.classList.add('a11y-high-contrast');
+        if (p.underlineLinks) h.classList.add('a11y-underline-links');
+        if (p.reduceMotion)   h.classList.add('a11y-reduce-motion');
+        if (p.readableText)   h.classList.add('a11y-readable-text');
+        if (p.readableFont)   h.classList.add('a11y-readable-font');
+      } catch (e) {}
+    }());
+  </script>
 </head>
 <body class="bg-white text-gray-900 font-sans antialiased min-h-screen flex flex-col items-center justify-center px-4">
 
@@ -55,5 +75,6 @@
     </p>
   </div>
 
+  <script src="js/a11y-toolbar.js" defer></script>
 </body>
 </html>
