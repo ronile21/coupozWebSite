@@ -243,8 +243,15 @@
       '</div>'
     ].join('\n');
 
-    document.body.appendChild(btn);
+    /* --- Backdrop overlay --- */
+    var backdrop = document.createElement('div');
+    backdrop.id        = 'a11y-backdrop';
+    backdrop.className = 'a11y-backdrop';
+    backdrop.setAttribute('aria-hidden', 'true');
+
+    document.body.appendChild(backdrop);
     document.body.appendChild(panel);
+    document.body.appendChild(btn);
   }
 
   /* -------------------------------------------------------
@@ -253,23 +260,30 @@
   var panelOpen = false;
 
   function openPanel() {
-    var panel = document.getElementById('a11y-panel');
-    var btn   = document.getElementById('a11y-toggle-btn');
+    var panel    = document.getElementById('a11y-panel');
+    var btn      = document.getElementById('a11y-toggle-btn');
+    var backdrop = document.getElementById('a11y-backdrop');
     if (!panel || !btn) return;
     panelOpen = true;
     panel.setAttribute('aria-hidden', 'false');
     btn.setAttribute('aria-expanded', 'true');
+    if (backdrop) backdrop.classList.add('is-visible');
+    /* Prevent page scroll while drawer is open */
+    document.body.style.overflow = 'hidden';
     var closeBtn = document.getElementById('a11y-close-btn');
     if (closeBtn) closeBtn.focus();
   }
 
   function closePanel() {
-    var panel = document.getElementById('a11y-panel');
-    var btn   = document.getElementById('a11y-toggle-btn');
+    var panel    = document.getElementById('a11y-panel');
+    var btn      = document.getElementById('a11y-toggle-btn');
+    var backdrop = document.getElementById('a11y-backdrop');
     if (!panel || !btn) return;
     panelOpen = false;
     panel.setAttribute('aria-hidden', 'true');
     btn.setAttribute('aria-expanded', 'false');
+    if (backdrop) backdrop.classList.remove('is-visible');
+    document.body.style.overflow = '';
     btn.focus();
   }
 
@@ -357,6 +371,10 @@
     if (el) el.addEventListener('click', function () {
       if (panelOpen) closePanel(); else openPanel();
     });
+
+    /* Backdrop click closes drawer */
+    el = document.getElementById('a11y-backdrop');
+    if (el) el.addEventListener('click', closePanel);
 
     /* Close button */
     el = document.getElementById('a11y-close-btn');
