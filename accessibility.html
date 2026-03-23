@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessibility Statement - CoupoZ</title>
+  <meta name="description" content="CoupoZ accessibility statement. Learn about our commitment to web accessibility and how to report issues." />
+  <link rel="canonical" href="https://coupoz.com/accessibility.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236C3EFF'/%3E%3Ctext y='.9em' font-size='70' x='12' fill='white'%3EC%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: {
+              50:  '#f0ebff',
+              100: '#e0d5ff',
+              400: '#8450ff',
+              500: '#6C3EFF',
+              600: '#5a2de7',
+              900: '#250f7a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom styles (focus rules, skip link, sr-only) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans antialiased">
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER (minimal, no JS dependency)
+  ============================================================ -->
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/" aria-label="CoupoZ home" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center shadow-md">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 14l-4-4 4-4M15 10l4 4-4 4M13 6l-2 12" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="text-xl font-black tracking-tight text-gray-900 dark:text-white">Coupo<span class="text-brand-500">Z</span></span>
+      </a>
+      <a href="/" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-brand-500 dark:hover:text-brand-400 transition-colors">&larr; Back to home</a>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content" tabindex="-1">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+
+      <!-- Page heading -->
+      <div class="mb-12">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-500 mb-3">Legal</span>
+        <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 dark:text-white leading-tight mb-4">
+          Accessibility Statement
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          CoupoZ is committed to making its website accessible to as many people as possible, regardless of technology or ability.
+        </p>
+        <p class="mt-3 text-sm text-gray-500 dark:text-gray-500">
+          Last updated: <time datetime="2026-03-23">23 March 2026</time>
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="prose-content space-y-10 text-gray-700 dark:text-gray-300 leading-relaxed">
+
+        <!-- Conformance -->
+        <section aria-labelledby="conformance-heading">
+          <h2 id="conformance-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Conformance status</h2>
+          <p>
+            We aim to conform to the
+            <a href="https://www.w3.org/TR/WCAG22/" class="text-brand-500 hover:underline" rel="noopener noreferrer" target="_blank">
+              Web Content Accessibility Guidelines (WCAG) 2.2, Level AA
+            </a>.
+            The current status is <strong>partial conformance</strong>: most criteria are met, but some areas — noted below — have known limitations or could not be fully verified without live assistive-technology testing.
+          </p>
+        </section>
+
+        <!-- Technical specs -->
+        <section aria-labelledby="tech-heading">
+          <h2 id="tech-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Technical specifications</h2>
+          <p>Accessibility of this website relies on the following technologies:</p>
+          <ul class="mt-3 space-y-1 list-disc list-inside">
+            <li>HTML5 (semantic landmarks, native interactive elements)</li>
+            <li>CSS (including <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">prefers-reduced-motion</code> and focus-visible styles)</li>
+            <li>JavaScript (ARIA state management, keyboard handling)</li>
+          </ul>
+          <p class="mt-3">
+            These technologies are relied upon for conformance. The website has been tested with:
+          </p>
+          <ul class="mt-3 space-y-1 list-disc list-inside">
+            <li>Keyboard-only navigation</li>
+            <li>Chrome and Firefox on desktop with screen magnification</li>
+            <li>Automated audits using axe-core (WCAG 2.2 AA ruleset)</li>
+            <li>VoiceOver on macOS (Safari) — manual spot checks</li>
+          </ul>
+        </section>
+
+        <!-- What we have done -->
+        <section aria-labelledby="done-heading">
+          <h2 id="done-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">What we have done</h2>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Added a <em>Skip to main content</em> link as the first focusable element on every page.</li>
+            <li>Used semantic HTML landmarks — <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">header</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">nav</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">main</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">footer</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">section</code> — throughout.</li>
+            <li>Ensured one clear <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">h1</code> per page with a consistent heading hierarchy.</li>
+            <li>Provided accessible names for all interactive controls (buttons, links) using visible text or <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-label</code>.</li>
+            <li>Applied visible <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">focus-visible</code> outlines on all focusable elements.</li>
+            <li>Managed <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-expanded</code> and <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-controls</code> on the FAQ accordion and mobile navigation menu.</li>
+            <li>Hidden collapsed FAQ answer panels from assistive technology using <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-hidden</code> when closed.</li>
+            <li>Added a <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-live</code> region to announce language changes to screen readers.</li>
+            <li>Marked all decorative SVG icons as <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-hidden="true"</code>.</li>
+            <li>Fixed colour contrast for body text (section subtitles, metric labels) to meet WCAG AA ratios.</li>
+            <li>Respected <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">prefers-reduced-motion</code> by disabling scroll-reveal animations and card hover transforms for users who request reduced motion.</li>
+            <li>Ensured the <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">lang</code> attribute on <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;html&gt;</code> is updated dynamically when the language is switched (English / Thai).</li>
+            <li>Used native <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;button&gt;</code> and <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">&lt;a&gt;</code> elements for all interactive controls — no <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">div</code> click handlers.</li>
+          </ul>
+        </section>
+
+        <!-- Known limitations -->
+        <section aria-labelledby="limits-heading">
+          <h2 id="limits-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Known limitations</h2>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>
+              <strong>Thai language screen-reader support:</strong> Thai content is served with the correct <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">lang="th"</code> attribute, but synthesis quality depends on the user's screen reader and its Thai voice support. We have not been able to perform comprehensive Thai AT testing.
+            </li>
+            <li>
+              <strong>Tailwind CSS via CDN:</strong> The site currently loads Tailwind from a content delivery network. This introduces a small render-blocking dependency that we intend to resolve by switching to a local build in a future release.
+            </li>
+            <li>
+              <strong>Decorative inline illustrations:</strong> The platform illustration SVG in the Solution section has an <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded text-sm">aria-label</code> describing it as a generic illustration. It carries no essential information; screen-reader users receive all equivalent information from the surrounding text.
+            </li>
+            <li>
+              <strong>Contact channel buttons (coming soon):</strong> WhatsApp, Telegram, and Line contact options are not yet active. They are displayed as non-interactive elements with visible "Coming soon" labels.
+            </li>
+          </ul>
+        </section>
+
+        <!-- What could not be verified automatically -->
+        <section aria-labelledby="unverified-heading">
+          <h2 id="unverified-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">What could not be verified automatically</h2>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>Cognitive accessibility and plain-language readability beyond automated checks.</li>
+            <li>Touch target sizing on all physical mobile devices.</li>
+            <li>Full JAWS and NVDA compatibility on Windows — only axe-core and VoiceOver checks have been performed.</li>
+          </ul>
+        </section>
+
+        <!-- Feedback -->
+        <section aria-labelledby="feedback-heading">
+          <h2 id="feedback-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Feedback and contact</h2>
+          <p>
+            If you encounter an accessibility barrier or have suggestions to help us improve, we want to hear from you. Please contact us:
+          </p>
+          <ul class="mt-4 space-y-2 list-disc list-inside">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:info@coupoz.com?subject=Accessibility%20feedback" class="text-brand-500 hover:underline">info@coupoz.com</a>
+              (please include "Accessibility feedback" in the subject line)
+            </li>
+          </ul>
+          <p class="mt-4">
+            We aim to respond to accessibility feedback within <strong>5 business days</strong>.
+          </p>
+        </section>
+
+        <!-- Formal complaints -->
+        <section aria-labelledby="complaints-heading">
+          <h2 id="complaints-heading" class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Formal complaints</h2>
+          <p>
+            If you are not satisfied with our response to an accessibility concern, you may contact the relevant national authority or equality body in your jurisdiction. In Thailand, this includes the
+            <a href="https://www.dep.go.th/" class="text-brand-500 hover:underline" rel="noopener noreferrer" target="_blank">
+              Department of Empowerment of Persons with Disabilities (DEP)
+            </a>.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="bg-gray-950 text-gray-400 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <p>&copy; <span id="footer-year"></span> CoupoZ. All rights reserved.</p>
+      <nav aria-label="Footer links">
+        <ul class="flex gap-4">
+          <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+          <li><a href="/accessibility.html" class="hover:text-white transition-colors" aria-current="page">Accessibility</a></li>
+          <li><a href="mailto:info@coupoz.com" class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Minimal: dynamic year + dark mode init (no full main.js dependency needed here)
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    (function () {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    }());
+  </script>
+</body>
+</html>
