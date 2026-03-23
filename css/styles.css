@@ -474,7 +474,7 @@ button:focus-visible {
 
 /* =============================================================
    ACCESSIBILITY TOOLBAR
-   Floating button (bottom-left) + slide-up panel.
+   Floating button (bottom-left) + side drawer from left edge.
    All selectors are prefixed with .a11y- to avoid conflicts.
    ============================================================= */
 
@@ -483,7 +483,7 @@ button:focus-visible {
   position: fixed;
   bottom: 1.25rem;
   left: 1.25rem;
-  z-index: 9000;
+  z-index: 9003;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
@@ -511,33 +511,57 @@ button:focus-visible {
   box-shadow: 0 0 0 5px var(--brand-500);
 }
 
-/* ---- Panel container ---- */
+/* ---- Backdrop overlay ---- */
+.a11y-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.a11y-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dark .a11y-backdrop {
+  background: rgba(0, 0, 0, 0.62);
+}
+
+/* ---- Side drawer panel ---- */
 .a11y-panel {
   position: fixed;
-  bottom: 5rem;
-  left: 1.25rem;
-  z-index: 9001;
-  width: 16.5rem;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20rem;
+  max-width: 85vw;
+  z-index: 9002;
   background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: none;
+  border-right: 1px solid #e5e7eb;
+  border-radius: 0;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
   pointer-events: none;
 }
 
 .a11y-panel[aria-hidden="false"] {
-  opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
   pointer-events: auto;
 }
 
 .dark .a11y-panel {
   background: #1f2937;
-  border-color: #374151;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-right-color: #374151;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
 }
 
 /* ---- Panel header ---- */
@@ -545,8 +569,9 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.875rem 1rem 0.75rem;
+  padding: 1.25rem 1.25rem 1rem;
   border-bottom: 1px solid #f3f4f6;
+  flex-shrink: 0;
 }
 
 .dark .a11y-panel-header {
@@ -554,15 +579,13 @@ button:focus-visible {
 }
 
 .a11y-panel-title {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #374151;
+  color: #111827;
 }
 
 .dark .a11y-panel-title {
-  color: #d1d5db;
+  color: #f9fafb;
 }
 
 /* ---- Close button ---- */
@@ -600,12 +623,14 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* ---- Panel body ---- */
+/* ---- Panel body (scrollable) ---- */
 .a11y-panel-body {
-  padding: 0.75rem;
+  padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.25rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
 /* ---- Text-size row ---- */
@@ -879,8 +904,8 @@ html.a11y-high-contrast button:focus-visible {
 /* Keep toolbar panel readable in high-contrast mode */
 html.a11y-high-contrast .a11y-panel {
   background-color: #1c1c1c !important;
-  border-color: #555 !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
+  border-right-color: #555 !important;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.8) !important;
 }
 
 html.a11y-high-contrast .a11y-panel-header {
@@ -943,6 +968,10 @@ html.a11y-reduce-motion .faq-answer-inner {
 }
 
 html.a11y-reduce-motion .a11y-panel {
+  transition: none !important;
+}
+
+html.a11y-reduce-motion .a11y-backdrop {
   transition: none !important;
 }
 
