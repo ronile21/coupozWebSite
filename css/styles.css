@@ -1003,3 +1003,188 @@ html.a11y-readable-font .a11y-panel,
 html.a11y-readable-font .a11y-panel * {
   font-family: 'Inter', system-ui, sans-serif !important;
 }
+
+/* =============================================================
+   TEMPORARY B2B PILOT GATE
+   Client-side demo gate only. Remove this block, the modal markup
+   in index.html, and js/pilot-gate.js after the pilot period.
+   ============================================================= */
+
+.pilot-gate-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 2.25rem;
+  padding: 0 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid var(--brand-500);
+  background: transparent;
+  color: var(--brand-500);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pilot-gate-btn:hover {
+  background: var(--brand-500);
+  color: #fff;
+}
+
+.dark .pilot-gate-btn {
+  color: #c4adff;
+  border-color: #c4adff;
+}
+
+.dark .pilot-gate-btn:hover {
+  background: var(--brand-500);
+  color: #fff;
+  border-color: var(--brand-500);
+}
+
+.pilot-gate-btn-mobile {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.pilot-gate-modal.hidden {
+  display: none;
+}
+
+.pilot-gate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pilot-gate-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dark .pilot-gate-overlay {
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.pilot-gate-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 22rem;
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  padding: 1.75rem 1.5rem 1.5rem;
+}
+
+.dark .pilot-gate-panel {
+  background: #1f2937;
+}
+
+.pilot-gate-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dark .pilot-gate-close {
+  color: #9ca3af;
+}
+
+.pilot-gate-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.dark .pilot-gate-title {
+  color: #f9fafb;
+}
+
+.pilot-gate-prompt {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 0.4rem;
+}
+
+.dark .pilot-gate-prompt {
+  color: #d1d5db;
+}
+
+.pilot-gate-disclaimer {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.dark .pilot-gate-disclaimer {
+  color: #6b7280;
+}
+
+.pilot-gate-input {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.pilot-gate-input:focus {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 1px;
+}
+
+.dark .pilot-gate-input {
+  background: #111827;
+  border-color: #374151;
+  color: #f9fafb;
+}
+
+.pilot-gate-error {
+  font-size: 0.8rem;
+  color: #dc2626;
+  margin-bottom: 0.75rem;
+}
+
+.pilot-gate-error.hidden {
+  display: none;
+}
+
+.dark .pilot-gate-error {
+  color: #f87171;
+}
+
+.pilot-gate-submit {
+  width: 100%;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--brand-500);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.pilot-gate-submit:hover {
+  background: var(--brand-600);
+}

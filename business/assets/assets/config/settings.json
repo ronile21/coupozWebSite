@@ -1,0 +1,10 @@
+ {
+  "server_host":"159.223.87.97",
+  "server_port": 5196,
+  "image_server_port": 5197,
+  "use_tls": false,
+  "location_gps_interval_refresh_seconds": 15,
+  "server_call_timeout_seconds": 90,
+  "max_retries_on_failure": 5,
+  "web_gateway_url": "https://www.coupoz.com"
+}
