@@ -139,8 +139,9 @@
             Request a demo
           </a>
 
-          <!-- Temporary B2B pilot gate entry point (removable) -->
-          <button type="button" class="pilot-gate-btn" id="pilot-gate-btn">Business Pilot</button>
+          <!-- Temporary B2B/B2C pilot gate entry points (removable) -->
+          <button type="button" class="pilot-gate-btn" id="pilot-gate-btn" data-pilot-target="/business/">Business Pilot</button>
+          <button type="button" class="pilot-gate-btn" id="pilot-gate-btn-consumer" data-pilot-target="/consumer/">Consumer Pilot</button>
 
           <!-- Mobile menu button -->
           <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -160,7 +161,8 @@
         <a href="#use-cases"    class="mobile-nav-link px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800" data-i18n="nav.usecases">Use cases</a>
         <a href="#faq"          class="mobile-nav-link px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800" data-i18n="nav.faq">FAQ</a>
         <a href="#contact"      class="mt-2 px-4 py-2.5 rounded-xl bg-brand-500 text-white text-sm font-semibold text-center" data-i18n="nav.demo">Request a demo</a>
-        <button type="button" class="pilot-gate-btn pilot-gate-btn-mobile" id="pilot-gate-btn-mobile">Business Pilot</button>
+        <button type="button" class="pilot-gate-btn pilot-gate-btn-mobile" id="pilot-gate-btn-mobile" data-pilot-target="/business/">Business Pilot</button>
+        <button type="button" class="pilot-gate-btn pilot-gate-btn-mobile" id="pilot-gate-btn-mobile-consumer" data-pilot-target="/consumer/">Consumer Pilot</button>
       </nav>
     </div>
   </header>
@@ -791,15 +793,15 @@
   </footer>
 
   <!-- ============================================================
-       TEMPORARY B2B PILOT GATE MODAL
+       TEMPORARY B2B/B2C PILOT GATE MODAL (shared)
        Client-side only, hard-coded demo code. Not a real security
-       control. Real auth starts at the B2B login page. Removable.
+       control. Real auth starts at the respective login page. Removable.
   ============================================================ -->
   <div id="pilot-gate-modal" class="pilot-gate-modal hidden" aria-hidden="true">
     <div class="pilot-gate-overlay" id="pilot-gate-overlay"></div>
     <div class="pilot-gate-panel" role="dialog" aria-modal="true" aria-labelledby="pilot-gate-title">
       <button type="button" class="pilot-gate-close" id="pilot-gate-close" aria-label="Close pilot access dialog">&times;</button>
-      <h2 id="pilot-gate-title" class="pilot-gate-title">Business Pilot Access</h2>
+      <h2 id="pilot-gate-title" class="pilot-gate-title">Pilot Access</h2>
       <p class="pilot-gate-prompt">Enter pilot access code to continue.</p>
       <p class="pilot-gate-disclaimer">Temporary demo access for a short pilot period. This is not a security mechanism.</p>
       <input type="password" id="pilot-gate-input" class="pilot-gate-input" autocomplete="off" aria-label="Pilot access code" />
