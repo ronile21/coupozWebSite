@@ -145,3 +145,6 @@ python3 -m http.server 8080
 ## Contact
 
 Business inquiries: [info@coupoz.com](mailto:info@coupoz.com)
+
+run this on  ::   python -m http.server 8080 --bind 127.0.0.1 ==> connect to localhost:8080
+run this on  ::   python -m http.server 8081 --bind 127.0.0.1

@@ -1,0 +1,13 @@
+{
+  "server_host": "10.0.0.3",
+  "server_port": 5196,
+  "web_gateway_url": "http://10.0.0.3:5199",
+  "image_server_port": 5197,
+  "use_tls": false,
+  "location_gps_interval_refresh_seconds": 15,
+  "server_call_timeout_seconds": 90,
+  "max_retries_on_failure": 5,
+  "area_feed_delta_poll_seconds": 60,
+  "area_feed_rediscovery_min_interval_seconds": 60,
+  "area_feed_rediscovery_distance_meters": 250
+}
