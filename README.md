@@ -1,6 +1,6 @@
-# CoupoZ - Landing Page
+# ActIntent - Landing Page
 
-A modern, static landing page for **CoupoZ** - a time and location-based coupon activation platform for malls, stores, and consumers.
+A modern, static landing page for **ActIntent** - a time and location-based coupon activation platform for malls, stores, and consumers.
 
 Hosted for free on [GitHub Pages](https://pages.github.com/).
 
@@ -14,7 +14,7 @@ Hosted for free on [GitHub Pages](https://pages.github.com/).
   404.html            Custom 404 error page
   robots.txt          Search engine crawler instructions
   sitemap.xml         Sitemap for SEO
-  CNAME               Custom domain configuration (coupoz.com)
+  CNAME               Custom domain configuration (actintent.com)
   README.md           This file
   assets/             Image folder (add og-image.png here for social sharing)
   css/
@@ -63,11 +63,11 @@ git push
 6. Click **Save**.
 7. GitHub will show your live URL (e.g. `https://ronile21.github.io/coupozWebSite/`) within a minute.
 
-**Using a custom domain (e.g. coupoz.com):**
+**Using a custom domain (e.g. actintent.com):**
 
 1. In the Pages settings, enter your domain in the **Custom domain** field and click Save.
 2. At your DNS provider, create a CNAME record pointing `www` to `ronile21.github.io`, or four A records pointing your apex domain to GitHub's IPs.
-3. The `CNAME` file in this repo already contains `coupoz.com` - do not delete it.
+3. The `CNAME` file in this repo already contains `actintent.com` - do not delete it.
 
 ---
 
@@ -89,9 +89,9 @@ The primary brand color is `#6C3EFF` (purple). To change it:
 The site uses **Inter** from Google Fonts. To swap fonts, change the `<link>` tag in `<head>` of `index.html` and update `fontFamily.sans` in the Tailwind config script.
 
 ### Contact links
-- Email: search `info@coupoz.com` in `index.html` and replace globally.
+- Email: search `info@actintent.com` in `index.html` and replace globally.
 - WhatsApp: find `https://wa.me/15550000000` and replace with your WhatsApp Business number.
-- Telegram: find `https://t.me/coupoz` and replace with your handle.
+- Telegram: find `https://t.me/actintent` and replace with your handle.
 
 ---
 
@@ -144,4 +144,4 @@ python3 -m http.server 8080
 
 ## Contact
 
-Business inquiries: [info@coupoz.com](mailto:info@coupoz.com)
+Business inquiries: [info@actintent.com](mailto:info@actintent.com)

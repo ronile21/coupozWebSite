@@ -1,10 +1,10 @@
 /* =============================================================
-   CoupoZ — Accessibility Toolbar
+   ActIntent - Accessibility Toolbar
    Standalone, no external dependencies.
    Injected via <script src="js/a11y-toolbar.js" defer> on every page.
 
    Features:
-     • Text size  (−3 → +5 steps, 10 % each)
+     • Text size  (-3 → +5 steps, 10 % each)
      • High contrast
      • Underline links
      • Reduce motion
@@ -69,7 +69,7 @@
   }
 
   /* Run once immediately (before DOMContentLoaded) so saved state
-     is re-applied synchronously — mirrors the early-apply <script>
+     is re-applied synchronously - mirrors the early-apply <script>
      in <head> but keeps the IIFE self-contained as a fallback. */
   loadState();
 
@@ -380,7 +380,7 @@
     el = document.getElementById('a11y-close-btn');
     if (el) el.addEventListener('click', closePanel);
 
-    /* Text size − */
+    /* Text size - */
     el = document.getElementById('a11y-text-dec');
     if (el) el.addEventListener('click', function () {
       if (state.textSize > MIN_STEP) { state.textSize -= 1; applyAll(); }

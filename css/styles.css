@@ -1,5 +1,5 @@
 /* =============================================================
-   CoupoZ - Custom Styles
+   ActIntent - Custom Styles
    Edit colors by changing the --brand-* custom properties below.
    ============================================================= */
 
@@ -98,7 +98,7 @@ body {
 }
 
 /* =============================================================
-   REDUCED MOTION  — honour user preference
+   REDUCED MOTION  - honour user preference
    Disables all non-essential animations and transitions.
    ============================================================= */
 
@@ -989,7 +989,7 @@ html.a11y-readable-text .faq-answer {
   max-width: 68ch;
 }
 
-/* ---- Readable font (Verdana — wider letterforms, good readability) ---- */
+/* ---- Readable font (Verdana - wider letterforms, good readability) ---- */
 html.a11y-readable-font,
 html.a11y-readable-font body,
 html.a11y-readable-font button,
@@ -998,7 +998,7 @@ html.a11y-readable-font a {
   font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif !important;
 }
 
-/* Restore Inter for the toolbar panel — keep it consistent */
+/* Restore Inter for the toolbar panel - keep it consistent */
 html.a11y-readable-font .a11y-panel,
 html.a11y-readable-font .a11y-panel * {
   font-family: 'Inter', system-ui, sans-serif !important;

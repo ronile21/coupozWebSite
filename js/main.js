@@ -1,5 +1,5 @@
 /* =============================================================
-   CoupoZ - main.js
+   ActIntent - main.js
    Vanilla JS only. No external dependencies.
    ============================================================= */
 
@@ -183,7 +183,7 @@
       'hero.h1b':         'for',
       'hero.h1c':         'physical venues',
       'hero.h1d':         '',
-      'hero.sub':         'CoupoZ helps malls, retailers, hotels, restaurants and commercial venues activate nearby customer intent through time-and-location-aware offers — with measurable, privacy-conscious business insights.',
+      'hero.sub':         'ActIntent helps malls, retailers, hotels, restaurants and commercial venues activate nearby customer intent through time-and-location-aware offers - with measurable, privacy-conscious business insights.',
       'hero.sub2':        'Turn nearby customer intent into measurable visits and sales.',
       'hero.cta.demo':    'Request a demo',
       'hero.cta.how':     'Platform overview',
@@ -191,7 +191,7 @@
 
       /* PROBLEM */ // change$$$
       'prob.label':       'The Problem',
-      'prob.h2':          'Nearby customer intent goes unmet — until now',
+      'prob.h2':          'Nearby customer intent goes unmet - until now',
       'prob.sub':         'Physical venues have always struggled to prove the real business value of promotions. The data never connects.',
       'prob.1.h3':        'Hard to measure results',
       'prob.1.p':         'Traditional print coupons and flyers offer limited visibility. Venues often struggle to connect promotional activity with business outcomes.',
@@ -204,7 +204,7 @@
       'sol.label':        'The Solution',
       'sol.h2a':          'Real-time activation,',
       'sol.h2b':          'measurable results',
-      'sol.p':            'CoupoZ enables physical venues to activate time-and-location-aware offers — reaching nearby customers at relevant moments and providing aggregated business insights.',
+      'sol.p':            'ActIntent enables physical venues to activate time-and-location-aware offers - reaching nearby customers at relevant moments and providing aggregated business insights.',
       'sol.b1.h':         'Physical venue activation layer',
       'sol.b1.p':         'Supports offer activity for malls, retailers, hotels, restaurants and commercial areas.',
       'sol.b2.h':         'Relevant nearby discovery',
@@ -212,7 +212,7 @@
       'sol.b3.h':         'Aggregated outcome indicators',
       'sol.b3.p':         'Supports business-facing performance indicators while keeping measurement methods private.',
       'sol.b4.h':         'AI-assisted campaign support',
-      'sol.b4.p':         'Support for campaign wording, offer content, creative enhancement and future recommendation workflows — designed to help business users move faster while keeping product details private.',
+      'sol.b4.p':         'Support for campaign wording, offer content, creative enhancement and future recommendation workflows - designed to help business users move faster while keeping product details private.',
       'sol.badge.title':  'Venue-ready',
       'sol.badge.sub':    'Demo available',
 
@@ -232,7 +232,7 @@
       /* USE CASES */ // change$$$
       'uc.label':         'Use Cases',
       'uc.h2':            'Built for physical venues and the teams that run them',
-      'uc.sub':           'Multiple audience types, one platform — each with a tailored experience.',
+      'uc.sub':           'Multiple audience types, one platform - each with a tailored experience.',
       'uc.mall.h3':       'Malls & Commercial Venues',
       'uc.mall.p':        'A venue-level view of business performance, operational readiness, and tenant support needs.',
       'uc.mall.b1':       'Aggregated venue indicators',
@@ -281,30 +281,30 @@
       /* FAQ */ // change$$$
       'faq.label':        'FAQ',
       'faq.h2':           'Common questions, clear answers',
-      'faq.1.q':          'What types of businesses can use CoupoZ?',
-      'faq.1.a':          'CoupoZ is designed for physical venue operators and businesses — including malls and commercial areas, retail stores and chains, hotels and hospitality venues, restaurants, and end consumers who want to discover nearby offers. If you operate or manage a physical venue where customer engagement matters, CoupoZ is built for you.',
-      'faq.2.q':          'How does CoupoZ approach privacy?',
+      'faq.1.q':          'What types of businesses can use ActIntent?',
+      'faq.1.a':          'ActIntent is designed for physical venue operators and businesses - including malls and commercial areas, retail stores and chains, hotels and hospitality venues, restaurants, and end consumers who want to discover nearby offers. If you operate or manage a physical venue where customer engagement matters, ActIntent is built for you.',
+      'faq.2.q':          'How does ActIntent approach privacy?',
       'faq.2.a':          'Location access is consent-based. Business reporting is designed around aggregated insights, with detailed privacy and data-processing terms handled in commercial/legal documentation.',
       'faq.3.q':          'How are venue and business roles separated?',
-      'faq.3.a':          'CoupoZ is designed with separate role boundaries for venue operators and business users. Detailed permission models and operational controls are covered under NDA.',
+      'faq.3.a':          'ActIntent is designed with separate role boundaries for venue operators and business users. Detailed permission models and operational controls are covered under NDA.',
       'faq.4.q':          'Where can we discuss setup and workflow details?',
       'faq.4.a':          'Detailed setup, onboarding, and operational workflow information is available in product discussions under NDA.',
       'faq.5.q':          'What metrics can stores and malls track?',
       'faq.5.a':          'Business users can review aggregated outcome indicators and performance summaries. Detailed reporting capabilities are covered in product discussions under NDA.',
       'faq.6.q':          'Is there a free trial or pilot program?',
       'faq.6.a':          'We support structured pilot discussions for selected physical venues and commercial partners. Pilot scope, commercial terms and operational details are discussed directly.',
-      'faq.7.q':          'How does AI fit into CoupoZ?',
-      'faq.7.a':          'CoupoZ is designed to support AI-assisted campaign creation, offer wording, image/content optimisation and future business recommendation workflows. The public site intentionally keeps AI architecture, model choices, data flows and automation logic private. Detailed AI capability discussions are available under NDA.',
+      'faq.7.q':          'How does AI fit into ActIntent?',
+      'faq.7.a':          'ActIntent is designed to support AI-assisted campaign creation, offer wording, image/content optimisation and future business recommendation workflows. The public site intentionally keeps AI architecture, model choices, data flows and automation logic private. Detailed AI capability discussions are available under NDA.',
 
       /* CONTACT */ // change$$$
       'contact.label':    'Get in touch',
-      'contact.h2':       'Ready to learn more about CoupoZ?',
+      'contact.h2':       'Ready to learn more about ActIntent?',
       'contact.sub':      'Detailed product discussions and demos are available under NDA.',
       'contact.email':    'Request a demo by email',
       'contact.or':       'Or email us directly at',
 
       /* FOOTER */ // change$$$
-      'footer.tagline':   'Real-time offer activation for physical venues — malls, retailers, hotels, restaurants and commercial areas.',
+      'footer.tagline':   'Real-time offer activation for physical venues - malls, retailers, hotels, restaurants and commercial areas.',
       'footer.nav':       'Navigate',
       'footer.contact':   'Contact',
       'footer.linkedin':  'LinkedIn (coming soon)',
@@ -328,7 +328,7 @@
       'hero.h1b':         'สำหรับ',
       'hero.h1c':         'สถานที่เชิงพาณิชย์',
       'hero.h1d':         '',
-      'hero.sub':         'CoupoZ ช่วยห้างสรรพสินค้า ผู้ค้าปลีก โรงแรม ร้านอาหาร และสถานที่เชิงพาณิชย์เปิดใช้งานความตั้งใจซื้อของลูกค้าใกล้เคียงผ่านข้อเสนอที่รับรู้เวลาและตำแหน่ง — พร้อมข้อมูลเชิงลึกทางธุรกิจที่วัดได้และใส่ใจความเป็นส่วนตัว',
+      'hero.sub':         'ActIntent ช่วยห้างสรรพสินค้า ผู้ค้าปลีก โรงแรม ร้านอาหาร และสถานที่เชิงพาณิชย์เปิดใช้งานความตั้งใจซื้อของลูกค้าใกล้เคียงผ่านข้อเสนอที่รับรู้เวลาและตำแหน่ง - พร้อมข้อมูลเชิงลึกทางธุรกิจที่วัดได้และใส่ใจความเป็นส่วนตัว',
       'hero.sub2':        'เปลี่ยนความตั้งใจซื้อของลูกค้าใกล้เคียงให้เป็นการเข้าชมและยอดขายที่วัดได้',
       'hero.cta.demo':    'ขอสาธิต',
       'hero.cta.how':     'ภาพรวมแพลตฟอร์ม',
@@ -336,7 +336,7 @@
 
       /* PROBLEM */ // change$$$
       'prob.label':       'ปัญหา',
-      'prob.h2':          'ความตั้งใจซื้อของลูกค้าใกล้เคียงถูกมองข้าม — จนกว่าจะถึงตอนนี้',
+      'prob.h2':          'ความตั้งใจซื้อของลูกค้าใกล้เคียงถูกมองข้าม - จนกว่าจะถึงตอนนี้',
       'prob.sub':         'สถานที่เชิงพาณิชย์มักพยายามพิสูจน์มูลค่าทางธุรกิจที่แท้จริงของโปรโมชันมาโดยตลอด ข้อมูลไม่เคยเชื่อมต่อกัน',
       'prob.1.h3':        'วัดผลลัพธ์ได้ยาก',
       'prob.1.p':         'คูปองกระดาษและใบปลิวแบบดั้งเดิมให้การมองเห็นที่จำกัด สถานที่มักเชื่อมโยงกิจกรรมโปรโมชันกับผลลัพธ์ทางธุรกิจได้ยาก',
@@ -349,7 +349,7 @@
       'sol.label':        'โซลูชัน',
       'sol.h2a':          'การเปิดใช้งานแบบเรียลไทม์',
       'sol.h2b':          'ผลลัพธ์ที่วัดได้',
-      'sol.p':            'CoupoZ ช่วยให้สถานที่เชิงพาณิชย์เปิดใช้งานข้อเสนอที่รับรู้เวลาและตำแหน่ง — เข้าถึงลูกค้าใกล้เคียงในช่วงเวลาที่เกี่ยวข้องและมอบข้อมูลเชิงลึกทางธุรกิจแบบรวม',
+      'sol.p':            'ActIntent ช่วยให้สถานที่เชิงพาณิชย์เปิดใช้งานข้อเสนอที่รับรู้เวลาและตำแหน่ง - เข้าถึงลูกค้าใกล้เคียงในช่วงเวลาที่เกี่ยวข้องและมอบข้อมูลเชิงลึกทางธุรกิจแบบรวม',
       'sol.b1.h':         'ชั้นการเปิดใช้งานสำหรับสถานที่จริง',
       'sol.b1.p':         'รองรับกิจกรรมข้อเสนอสำหรับห้างสรรพสินค้า ผู้ค้าปลีก โรงแรม ร้านอาหาร และพื้นที่เชิงพาณิชย์',
       'sol.b2.h':         'การค้นพบข้อเสนอใกล้ตัวที่เกี่ยวข้อง',
@@ -357,7 +357,7 @@
       'sol.b3.h':         'ตัวชี้วัดผลลัพธ์แบบรวม',
       'sol.b3.p':         'รองรับตัวชี้วัดประสิทธิภาพสำหรับธุรกิจ พร้อมเก็บวิธีการวัดผลไว้เป็นข้อมูลส่วนตัว',
       'sol.b4.h':         'การสนับสนุนแคมเปญด้วย AI',
-      'sol.b4.p':         'รองรับการเขียนข้อความแคมเปญ เนื้อหาข้อเสนอ การปรับปรุงครีเอทีฟ และเวิร์กโฟลว์คำแนะนำในอนาคต — ออกแบบมาเพื่อช่วยให้ผู้ใช้งานธุรกิจทำงานได้เร็วขึ้น โดยยังคงเก็บรายละเอียดผลิตภัณฑ์ไว้เป็นข้อมูลส่วนตัว',
+      'sol.b4.p':         'รองรับการเขียนข้อความแคมเปญ เนื้อหาข้อเสนอ การปรับปรุงครีเอทีฟ และเวิร์กโฟลว์คำแนะนำในอนาคต - ออกแบบมาเพื่อช่วยให้ผู้ใช้งานธุรกิจทำงานได้เร็วขึ้น โดยยังคงเก็บรายละเอียดผลิตภัณฑ์ไว้เป็นข้อมูลส่วนตัว',
       'sol.badge.title':  'พร้อมสำหรับสถานที่',
       'sol.badge.sub':    'ขอสาธิตได้',
 
@@ -377,7 +377,7 @@
       /* USE CASES */ // change$$$
       'uc.label':         'กรณีการใช้งาน',
       'uc.h2':            'สร้างมาสำหรับสถานที่เชิงพาณิชย์และทีมที่บริหารจัดการ',
-      'uc.sub':           'หลากหลายกลุ่มผู้ใช้ หนึ่งแพลตฟอร์ม — แต่ละกลุ่มได้รับประสบการณ์ที่ปรับแต่งเฉพาะ',
+      'uc.sub':           'หลากหลายกลุ่มผู้ใช้ หนึ่งแพลตฟอร์ม - แต่ละกลุ่มได้รับประสบการณ์ที่ปรับแต่งเฉพาะ',
       'uc.mall.h3':       'ห้างสรรพสินค้าและพื้นที่เชิงพาณิชย์',
       'uc.mall.p':        'มุมมองระดับสถานที่ของประสิทธิภาพทางธุรกิจ ความพร้อมในการดำเนินงาน และความต้องการสนับสนุนผู้เช่า',
       'uc.mall.b1':       'ตัวชี้วัดสถานที่แบบรวม',
@@ -426,30 +426,30 @@
       /* FAQ */ // change$$$
       'faq.label':        'คำถามที่พบบ่อย',
       'faq.h2':           'คำถามทั่วไป คำตอบที่ชัดเจน',
-      'faq.1.q':          'ธุรกิจประเภทใดที่สามารถใช้ CoupoZ ได้?',
-      'faq.1.a':          'CoupoZ ออกแบบมาสำหรับผู้ดำเนินการสถานที่เชิงพาณิชย์และธุรกิจ — รวมถึงห้างสรรพสินค้าและพื้นที่เชิงพาณิชย์ ร้านค้าและเชนค้าปลีก โรงแรมและสถานที่บริการ ร้านอาหาร และผู้บริโภคที่ต้องการค้นพบข้อเสนอใกล้ตัว หากคุณดำเนินการหรือบริหารสถานที่เชิงพาณิชย์ที่การมีส่วนร่วมของลูกค้ามีความสำคัญ CoupoZ สร้างมาเพื่อคุณ',
-      'faq.2.q':          'CoupoZ มีแนวทางด้านความเป็นส่วนตัวอย่างไร?',
+      'faq.1.q':          'ธุรกิจประเภทใดที่สามารถใช้ ActIntent ได้?',
+      'faq.1.a':          'ActIntent ออกแบบมาสำหรับผู้ดำเนินการสถานที่เชิงพาณิชย์และธุรกิจ - รวมถึงห้างสรรพสินค้าและพื้นที่เชิงพาณิชย์ ร้านค้าและเชนค้าปลีก โรงแรมและสถานที่บริการ ร้านอาหาร และผู้บริโภคที่ต้องการค้นพบข้อเสนอใกล้ตัว หากคุณดำเนินการหรือบริหารสถานที่เชิงพาณิชย์ที่การมีส่วนร่วมของลูกค้ามีความสำคัญ ActIntent สร้างมาเพื่อคุณ',
+      'faq.2.q':          'ActIntent มีแนวทางด้านความเป็นส่วนตัวอย่างไร?',
       'faq.2.a':          'การเข้าถึงตำแหน่งที่ตั้งเป็นไปตามความยินยอม การรายงานธุรกิจออกแบบรอบข้อมูลเชิงลึกแบบรวม โดยมีรายละเอียดความเป็นส่วนตัวและข้อกำหนดการประมวลผลข้อมูลจัดการผ่านเอกสารเชิงพาณิชย์และกฎหมาย',
       'faq.3.q':          'บทบาทของสถานที่และธุรกิจแยกจากกันอย่างไร?',
-      'faq.3.a':          'CoupoZ ออกแบบให้มีขอบเขตบทบาทแยกกันสำหรับผู้ดำเนินการสถานที่และผู้ใช้งานธุรกิจ รายละเอียดโมเดลสิทธิ์และการควบคุมการดำเนินงานครอบคลุมภายใต้ NDA',
+      'faq.3.a':          'ActIntent ออกแบบให้มีขอบเขตบทบาทแยกกันสำหรับผู้ดำเนินการสถานที่และผู้ใช้งานธุรกิจ รายละเอียดโมเดลสิทธิ์และการควบคุมการดำเนินงานครอบคลุมภายใต้ NDA',
       'faq.4.q':          'เราจะพูดคุยรายละเอียดการตั้งค่าและเวิร์กโฟลว์ได้ที่ไหน?',
       'faq.4.a':          'ข้อมูลการตั้งค่า การเริ่มต้นใช้งาน และเวิร์กโฟลว์การดำเนินงานโดยละเอียดมีให้ในการพูดคุยเกี่ยวกับผลิตภัณฑ์ภายใต้ NDA',
       'faq.5.q':          'ร้านค้าและห้างฯ สามารถติดตามเมตริกใดได้บ้าง?',
       'faq.5.a':          'ผู้ใช้งานธุรกิจสามารถดูตัวชี้วัดผลลัพธ์แบบรวมและสรุปประสิทธิภาพ ความสามารถในการรายงานโดยละเอียดครอบคลุมในการพูดคุยเกี่ยวกับผลิตภัณฑ์ภายใต้ NDA',
       'faq.6.q':          'มีการทดลองใช้ฟรีหรือโปรแกรมนำร่องหรือไม่?',
       'faq.6.a':          'เรารองรับการพูดคุยนำร่องที่มีโครงสร้างสำหรับสถานที่จริงและพันธมิตรเชิงพาณิชย์ที่คัดเลือก ขอบเขตนำร่อง เงื่อนไขเชิงพาณิชย์ และรายละเอียดการดำเนินงานจะพูดคุยกันโดยตรง',
-      'faq.7.q':          'AI เข้ากับ CoupoZ อย่างไร?',
-      'faq.7.a':          'CoupoZ ออกแบบมาเพื่อรองรับการสร้างแคมเปญด้วย AI การเขียนข้อความข้อเสนอ การปรับแต่งรูปภาพ/เนื้อหา และเวิร์กโฟลว์คำแนะนำทางธุรกิจในอนาคต เว็บไซต์สาธารณะตั้งใจเก็บสถาปัตยกรรม AI ตัวเลือกโมเดล กระแสข้อมูล และตรรกะอัตโนมัติไว้เป็นข้อมูลส่วนตัว การพูดคุยรายละเอียดความสามารถด้าน AI มีให้ภายใต้ NDA',
+      'faq.7.q':          'AI เข้ากับ ActIntent อย่างไร?',
+      'faq.7.a':          'ActIntent ออกแบบมาเพื่อรองรับการสร้างแคมเปญด้วย AI การเขียนข้อความข้อเสนอ การปรับแต่งรูปภาพ/เนื้อหา และเวิร์กโฟลว์คำแนะนำทางธุรกิจในอนาคต เว็บไซต์สาธารณะตั้งใจเก็บสถาปัตยกรรม AI ตัวเลือกโมเดล กระแสข้อมูล และตรรกะอัตโนมัติไว้เป็นข้อมูลส่วนตัว การพูดคุยรายละเอียดความสามารถด้าน AI มีให้ภายใต้ NDA',
 
       /* CONTACT */ // change$$$
       'contact.label':    'ติดต่อเรา',
-      'contact.h2':       'พร้อมเรียนรู้เพิ่มเติมเกี่ยวกับ CoupoZ แล้วหรือยัง?',
+      'contact.h2':       'พร้อมเรียนรู้เพิ่มเติมเกี่ยวกับ ActIntent แล้วหรือยัง?',
       'contact.sub':      'การพูดคุยเกี่ยวกับผลิตภัณฑ์โดยละเอียดและการสาธิตมีให้บริการภายใต้ NDA',
       'contact.email':    'ขอสาธิตทางอีเมล',
       'contact.or':       'หรือส่งอีเมลถึงเราโดยตรงที่',
 
       /* FOOTER */ // change$$$
-      'footer.tagline':   'การเปิดใช้งานข้อเสนอแบบเรียลไทม์สำหรับสถานที่เชิงพาณิชย์ — ห้างสรรพสินค้า ผู้ค้าปลีก โรงแรม ร้านอาหาร และพื้นที่เชิงพาณิชย์',
+      'footer.tagline':   'การเปิดใช้งานข้อเสนอแบบเรียลไทม์สำหรับสถานที่เชิงพาณิชย์ - ห้างสรรพสินค้า ผู้ค้าปลีก โรงแรม ร้านอาหาร และพื้นที่เชิงพาณิชย์',
       'footer.nav':       'นำทาง',
       'footer.contact':   'ติดต่อ',
       'footer.linkedin':  'LinkedIn (เร็วๆ นี้)',

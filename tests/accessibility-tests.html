@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CoupoZ Accessibility Test Suite</title>
+  <title>ActIntent Accessibility Test Suite</title>
   <!--
     HOW TO RUN:
     1. Serve the project root from a local HTTP server:
          npx serve .           (Node)
          python3 -m http.server (Python)
     2. Open http://localhost:PORT/tests/accessibility-tests.html
-    3. Click "Run automated checks" — requires same-origin iframe access.
+    3. Click "Run automated checks" - requires same-origin iframe access.
 
     The manual checklist below can be used standalone at any time.
   -->
@@ -67,7 +67,7 @@
 </head>
 <body>
 
-  <h1>CoupoZ Accessibility Test Suite</h1>
+  <h1>ActIntent Accessibility Test Suite</h1>
   <p class="subtitle">WCAG 2.2 AA · axe-core automated checks + structural assertions + manual checklist</p>
 
   <!-- ============================================================
@@ -98,7 +98,7 @@
     <label><input type="checkbox" data-key="skip-link"> Skip-to-content link appears on first <kbd>Tab</kbd> press and moves focus to <code>#main-content</code>.<span class="note">Press Tab from address bar with the main page open.</span></label>
     <label><input type="checkbox" data-key="tab-order"> Tabbing through the page follows a logical top-to-bottom, left-to-right order.<span class="note">Tab through every element without a mouse.</span></label>
     <label><input type="checkbox" data-key="focus-visible"> Every interactive element (links, buttons, FAQ triggers) shows a clearly visible focus ring.<span class="note">Should be a 2px purple outline.</span></label>
-    <label><input type="checkbox" data-key="no-trap"> No keyboard trap exists — focus can always leave any component with Tab or Escape.<span class="note">Check the mobile menu in particular.</span></label>
+    <label><input type="checkbox" data-key="no-trap"> No keyboard trap exists - focus can always leave any component with Tab or Escape.<span class="note">Check the mobile menu in particular.</span></label>
     <label><input type="checkbox" data-key="mobile-menu-kb"> Mobile menu opens with Enter/Space on hamburger button; nav links are reachable; menu closes when a link is activated.<span class="note">Resize to &lt;768px or DevTools mobile mode.</span></label>
     <label><input type="checkbox" data-key="faq-kb"> FAQ accordion opens/closes with Enter/Space; aria-expanded updates; answer text becomes accessible when open.<span class="note">Tab to a trigger, press Space.</span></label>
     <label><input type="checkbox" data-key="theme-kb"> Dark-mode toggle is reachable and activatable by keyboard.<span class="note">Tab to it, press Space or Enter.</span></label>
@@ -111,7 +111,7 @@
     <label><input type="checkbox" data-key="sr-headings"> Headings list shows a logical hierarchy: H1 → H2 sections → H3 cards.<span class="note">VoiceOver rotor → Headings / NVDA → H key.</span></label>
     <label><input type="checkbox" data-key="sr-faq-aria"> When FAQ is closed, screen reader does NOT read answer text. When open, it reads cleanly.<span class="note">aria-hidden should control this.</span></label>
     <label><input type="checkbox" data-key="sr-lang-announce"> Switching language announces "Language changed to English" or the Thai equivalent via a live region.<span class="note">Listen while switching language.</span></label>
-    <label><input type="checkbox" data-key="sr-icons"> Decorative icons are not read aloud (aria-hidden). The CoupoZ logo link is announced as "CoupoZ home".<span class="note">Navigate to logo area.</span></label>
+    <label><input type="checkbox" data-key="sr-icons"> Decorative icons are not read aloud (aria-hidden). The ActIntent logo link is announced as "ActIntent home".<span class="note">Navigate to logo area.</span></label>
     <label><input type="checkbox" data-key="sr-theme-label"> Dark-mode button label reflects current action: "Switch to dark mode" or "Switch to light mode".<span class="note">Tab to it and listen to VoiceOver/NVDA.</span></label>
   </div>
 
@@ -147,7 +147,7 @@
   ============================================================ -->
   <iframe id="test-frame"
           src="../index.html"
-          title="Test frame — index.html"
+          title="Test frame - index.html"
           style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;"
           tabindex="-1"
           aria-hidden="true">
@@ -396,7 +396,7 @@
         html += '<p class="' + (r.pass ? 'struct-pass' : 'struct-fail') + '" style="margin:0.35rem 0;">'
           + (r.pass ? '&#10003; ' : '&#10007; ')
           + escHtml(r.label)
-          + (r.detail ? ' <span style="font-weight:400;color:#6b7280;font-size:0.82rem;">— ' + escHtml(r.detail) + '</span>' : '')
+          + (r.detail ? ' <span style="font-weight:400;color:#6b7280;font-size:0.82rem;">- ' + escHtml(r.detail) + '</span>' : '')
           + '</p>';
       });
 
